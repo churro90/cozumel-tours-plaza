@@ -1,9 +1,6 @@
 {
   "name": "cozumel-tours-plaza",
   "version": "1.0.0",
-  "engines":{
-    "node": "6.11.2"
-  },
   "description": "Cozumel Tours Plaza Website",
   "main": "app.js",
   "dependencies": {
@@ -14,7 +11,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Martin Carrasco",
