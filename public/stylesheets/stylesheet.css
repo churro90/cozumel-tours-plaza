@@ -1,6 +1,7 @@
 body{
    font-family: 'proxima-nova', sans-serif;
-   min-height: 100%
+   min-height: 100%;
+   
  }
  
 
@@ -92,7 +93,11 @@ body{
    z-index: 1;
     position: relative;
 }
-.screen-container3 {
+
+.screen-container3{
+    height: 200vh;
+}
+.screen-container4 {
     height:100vh;
     background: hsl(205, 84%, 14%);
     color: white;
@@ -100,9 +105,10 @@ body{
     font-weight: 200;
   }
   
-.screen-container4 {
-    height:100vh;
+.screen-container5 {
+    height: 100vh;
     background: white;
+    max-width: 100%;
 }
 
 .bg {
@@ -393,5 +399,27 @@ sub-footer > a {
     display: inline;
     margin:0 10px;
 }
-       
+    
+body .popover {
+  max-width: 830px;
+}       
 
+.border{
+        display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.border2{
+        display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 4px;
+}

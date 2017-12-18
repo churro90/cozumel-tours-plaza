@@ -87,7 +87,23 @@ function topFunction() {
 
 $(function(){$("#myBtn").click(function(){$("html,body").animate({scrollTop:$(".top").offset().top},"1200");return false})})
 
-//Scroll Trigger
+//Popover
+
+$(document).ready(function() {
+  // grab all thumbnails and add bootstrap popovers
+  // https://getbootstrap.com/javascript/#popovers
+  $('[data-toggle="popover"]').popover({
+    container: 'body',
+    html: true,
+    placement: 'auto',
+    trigger: 'hover',
+    content: function() {
+      // get the url for the full size img
+      var url = $(this).data('full');
+      return url
+    }
+  });
+});
 
 
 
