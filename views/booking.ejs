@@ -1,0 +1,116 @@
+<% include partials/header %>
+
+<div class="booking">
+    <form id="booking">
+        <h1 class="text-center"><strong>Book your vehicle</strong></h1>
+         <div class="form-group ">
+            <label for="vehicleSelect"><strong>Select Vehicle *</strong></label>
+                <select class="form-control" id="vehicleSelect" required>
+                  <option value="none" > </option>
+                  <option value="car">Car (up to 4 guests)</option>
+                  <option value="van">Van (up to 9 guests)</option>
+                  <option value="xVan">xVan (up to 10 guests)</option>
+                  <option value="largerVan">Larger Van (up to 14 guests)</option>
+                </select>
+          </div>
+            <div class="form-group">
+                <label for="datepicker"><strong>Select date *</strong> </label>
+                 <input id="datepicker" type="text" class="form-control" required>
+            </div>
+            <div id="data" class="invisible">
+            <div class="form-group">
+                <label for="firstName"><strong>First Name *</strong></label>
+                <input type="text" id="firstName"  class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName"><strong>Last Name *</strong></label>
+                <input type="text" id="lastName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email"><strong>Email *</strong></label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="form-group ">
+            <label for="timeSelect"><strong>Starting time *</strong></label>
+                <select class="form-control" id="timeSelect" required>
+                  <option value="730">7:30 AM</option>
+                  <option value="800">8:00 AM</option>
+                  <option value="830">8:30 AM</option>
+                  <option value="900">9:00 AM</option>
+                  <option value="930">9:30 AM</option>
+                  <option value="1000">10:00 AM</option>
+                  <option value="1030">10:30 AM</option>
+                  <option value="1100">11:00 AM</option>
+                  <option value="1130">11:30 AM</option>
+                  <option value="1200">12:00 PM</option>
+                  <option value="1230">12:30 PM</option>
+                  <option value="1300">13:00 PM</option>
+                  <option value="1330">13:30 PM</option>
+                  <option value="1400">14:00 PM</option>
+                  <option value="1430">14:30 PM</option>
+                  <option value="1500">15:00 PM</option>
+                </select>
+          </div>
+            <div class="form-group ">
+            <label for="people"><strong>Number of people *</strong></label>
+                <select class="form-control" id="people" required>
+                </select>
+          </div>
+          <label for="cruise"><strong>Hotel or ship? * </strong></label>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="cruise" value="cruise" checked="checked"> Cruise Ship
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="hotel" value="hotel"> Hotel in Cozumel
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="playa" value="playa"> Playa del Carmen
+              </label>
+            </div>
+             <div class="form-group" style="padding-top: 12px">
+                <label for="nameHotelOrCruise"><strong>Name of the hotel you are staying or cruise you are arriving</strong></label>
+                <input type="text" id="nameHotelOrCruise" class="form-control">
+             </div>
+                <div class="form-group ">
+            <label for="country"><strong>Choose your country</strong></label>
+                <select class="form-control" id="country" required>
+                   <option value="null"></option>
+                   <% countries.forEach(function(country){ %>
+                    <option value=<%= country.code %>> <%= country.name %> </option>
+                      <% }); %>
+                </select>
+          </div>
+            <label for="cellphone"><strong>Cellphone</strong></label>
+             <div class="form-group row">
+                <p id="code" class="col-lg-1 text-center"></p><input class="col-lg-11" type="tel" id="cellphone" class="form-control" required>
+             </div>
+            <label for="info"><strong>Do you have an idea, more or less, of what you want to do or where you want to go during the tour? This information allows the driver/guide to plan a fun and informative day so you can enjoy every part of the tour. Please let us know.</strong></label>
+             <div class="form-group">
+               <textarea id="info" rows="5" cols="157"></textarea>
+             </div>
+            <label for="requirement"><strong>Do you have any special requirement or condition that the driver should know in order for you to have the best experience possible.</strong></label>
+             <div class="form-group">
+               <textarea id="requirement" rows="5" cols="157"></textarea>
+             </div>
+              <label for="babySeat"><strong>Do you need an additional item?</strong></label>
+             <div class="form-group">
+               <input type="checkbox" id="babySeat" value="babySeat"> 1 baby seat USD $10
+             </div>
+             <input type="submit" class="btn btn-lg btn-default btn-primary btn-block" value="Submit">
+             <p>*Required fields</p>
+            </div>
+     </form>
+ 
+</div>
+
+
+
+
+<script type="text/javascript" src="/javascript/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/javascript/booking.js"></script>
+<% include partials/footer %>

@@ -16,19 +16,6 @@ body{
     height: 25px;
 }
 
-#main-container {
-    height: 100vh;
-    position: relative;
-    text-align: center;
-    width: 100%;
-    min-height: 350px;
-    background-color: #252a30;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-image: url(/assets/images/Cozumel-Main-Background.jpg);
-    opacity: 0.9;
-}
 
 #contenido{
     display: table-cell;
@@ -40,12 +27,13 @@ body{
  
 }
 
+
 .texto {
     color: white;
-    margin-top: 200px;
-    position: static;
+    position: relative;
+    padding: 50vh 20px;
     text-align: left;
-    width:100%;
+   
 }
 
 
@@ -82,21 +70,41 @@ body{
    
 }
 
+.main-container {
+    height: 100vh;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    min-height: 350px;
+    background-color: #252a30;
+    background: url('/assets/images/Cozumel-Tour.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+}
+
 .screen-container {
     height:75vh;
     margin-top: 17vh;
 }
 
-.screen-container2 {
+.screen-container2{
+    height: 175vh;
+    background: #ADA996;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.screen-container3 {
     height:100vh;
   /*  background-color: #eee;*/
    z-index: 1;
     position: relative;
 }
 
-.screen-container3{
-    height: 200vh;
-}
+
 .screen-container4 {
     height:100vh;
     background: hsl(205, 84%, 14%);
@@ -407,9 +415,7 @@ body .popover {
 .border{
         display: block;
     padding: 4px;
-    margin-bottom: 20px;
     line-height: 1.42857143;
-    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
@@ -419,7 +425,148 @@ body .popover {
     padding: 4px;
     margin-bottom: 20px;
     line-height: 1.42857143;
-    background-color: #fff;
     border: 1px solid black;
     border-radius: 4px;
+}
+
+.mosaic {
+    width: 208px;
+    height: 138px;
+}
+
+/*================ABOUT US PAGE=====================*/
+
+.one-screen{    /*ocupa una pantalla exacta*/
+    height: 86.4vh;
+    margin-top: 10vh;
+    position: relative;
+    width: 100%;
+}
+
+.about {
+    height: 80.4vh;
+}
+
+#aboutUs {
+    width: auto;
+    height: 50vh;
+    border-radius: 0.25rem;
+}
+
+/*==================PRICES PAGE=====================*/
+
+.prices{
+    height: 100vh;
+    margin-top: 10vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.columns {
+    float: left;
+    width: 25%;
+    padding: 8px;
+}
+
+.price {
+    list-style-type: none;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.price:hover {
+    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+.price .header {
+    background-color: #111;
+    color: white;
+    font-size: 25px;
+}
+
+.price li {
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+}
+
+.price .grey {
+    background-color: #eee;
+    font-size: 20px;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+    .columns {
+        width: 100%;
+    }
+}
+
+.conditions {
+    font-size: 12px;
+}
+
+/*======================BOOKING PAGE ========================*/
+
+.booking{
+    height: auto;
+    margin-top: 10vh;
+}
+
+#booking {
+    margin: 15vh 5vh;
+}
+
+.invisible {
+    opacity: 1;
+    height: 35vh;
+}
+
+#code {
+    margin:  0 !important;
+    border-style: solid;
+    border-width: 1.2px;
+    border-color: #ab9898ad;
+    border-radius: .25rem;
+    font-weight: 700;
+    width: 80px;
+    
+}
+
+#info{
+    border-radius: .25rem;
+}
+
+ #cellphone {
+     border-radius: .25rem;
+     width: 1000px;
+ }
+ 
+ #requirement {
+     border-radius: .25rem;
+ }
+ 
+ /*===================CONTACT US================*/
+ .contact{
+    height: auto;
+    width: auto;
+    margin-top: 10vh;
+}
+
+#message {
+    border-radius: 0.25rem;
 }
