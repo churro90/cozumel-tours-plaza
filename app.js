@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-mongoose.connect("mongodb://localhost/tours_plaza");
+mongoose.connect("mongodb://mcarrf90:17856904k@ds157653.mlab.com:57653/tours_plaza");
     
     
 app.get("/", function(req, res){
