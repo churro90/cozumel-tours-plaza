@@ -1,14 +1,13 @@
 var express    = require("express"),
     app        = express(),
     bodyParser = require("body-parser"),
-    Country = require("./models/countries"),
+    Country    = require("./models/countries"),
     mongoose   = require("mongoose");
     
     
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-
 mongoose.connect("mongodb://martin:toursplaza@ds157653.mlab.com:57653/tours_plaza");
     
     
@@ -40,7 +39,10 @@ app.get("/contact", function(req, res){
    res.render("contact"); 
 });
     
-    
+app.get("/faq", function(req, res) {
+    res.render("faq");
+});
+ 
     
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Servidor iniciado");

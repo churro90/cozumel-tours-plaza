@@ -84,6 +84,14 @@ body{
     opacity: 0.9;
 }
 
+.bravo {
+    z-index: 100;
+    padding-top: 15vh;
+    float: right;
+    position: relative;
+    margin-right: 5vh;
+}
+
 .screen-container {
     height:75vh;
     margin-top: 17vh;
@@ -114,7 +122,7 @@ body{
   }
   
 .screen-container5 {
-    height: 100vh;
+    height: 70vh;
     background: white;
     max-width: 100%;
 }
@@ -133,7 +141,9 @@ body{
     height: 100%;
 }
 
-
+.certificate{
+    margin: 0 33%;
+}
 
 .navbar-nav > li {
    padding-left: 30px;  
@@ -385,11 +395,6 @@ body{
  height: 255px;
 }
 
-
-  #map {
-        height: 400px;
-        width: 100%;
-       }
        
 .footer {
   clear: both;
@@ -427,6 +432,7 @@ body .popover {
     line-height: 1.42857143;
     border: 1px solid black;
     border-radius: 4px;
+    font-size: 20px;
 }
 
 .mosaic {
@@ -436,15 +442,11 @@ body .popover {
 
 /*================ABOUT US PAGE=====================*/
 
-.one-screen{    /*ocupa una pantalla exacta*/
-    height: 86.4vh;
-    margin-top: 10vh;
-    position: relative;
-    width: 100%;
-}
+
 
 .about {
-    height: 80.4vh;
+    height: 75vh;
+    
 }
 
 #aboutUs {
@@ -468,6 +470,7 @@ body .popover {
     float: left;
     width: 25%;
     padding: 8px;
+    
 }
 
 .price {
@@ -517,7 +520,7 @@ body .popover {
 }
 
 .conditions {
-    font-size: 12px;
+    font-size: 20px;
 }
 
 /*======================BOOKING PAGE ========================*/
@@ -525,15 +528,17 @@ body .popover {
 .booking{
     height: auto;
     margin-top: 10vh;
+    
 }
 
 #booking {
     margin: 15vh 5vh;
+    height: auto;
 }
 
 .invisible {
     opacity: 1;
-    height: 35vh;
+    
 }
 
 #code {
@@ -569,4 +574,24 @@ body .popover {
 
 #message {
     border-radius: 0.25rem;
+}
+
+/*=====================FAQ PAGE===================*/
+
+.faq {
+    padding-top: 25vh;
+    font-size: 1.5rem;
+}
+
+.responses {
+    margin-top: 25vh;
+}
+
+#q1, #q2, #q3, #q4, #q5, #q6, #q7 {
+    padding-top: 75px;
+}
+
+
+.r {
+    font-size: 1.2rem;
 }

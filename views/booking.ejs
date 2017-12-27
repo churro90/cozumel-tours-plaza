@@ -1,8 +1,12 @@
 <% include partials/header %>
 
+ 
+
+
 <div class="booking">
     <form id="booking">
         <h1 class="text-center"><strong>Book your vehicle</strong></h1>
+        <p class="border2">The cars take up to 4 passengers, but for comfort we recommend groups of 4 book a van, especially if anyone in the group is tall or large, so If you feel you will be unconfortable in the car, we can offer you a special 4 person Van price please <a href="/contact#subject=Special%20Price">contact us</a></p>
          <div class="form-group ">
             <label for="vehicleSelect"><strong>Select Vehicle *</strong></label>
                 <select class="form-control" id="vehicleSelect" required>
@@ -17,6 +21,8 @@
                 <label for="datepicker"><strong>Select date *</strong> </label>
                  <input id="datepicker" type="text" class="form-control" required>
             </div>
+            
+
             <div id="data" class="invisible">
             <div class="form-group">
                 <label for="firstName"><strong>First Name *</strong></label>
@@ -101,6 +107,7 @@
              <div class="form-group">
                <input type="checkbox" id="babySeat" value="babySeat"> 1 baby seat USD $10
              </div>
+             <strong>By submiting, you are accepting our <a href="#">terms and conditions</a></strong>
              <input type="submit" class="btn btn-lg btn-default btn-primary btn-block" value="Submit">
              <p>*Required fields</p>
             </div>
