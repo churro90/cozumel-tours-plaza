@@ -576,6 +576,11 @@ body .popover {
     border-radius: 0.25rem;
 }
 
+.flash {
+    margin-top : 8%;
+    margin-bottom: 0 !important;
+}
+
 /*=====================FAQ PAGE===================*/
 
 .faq {

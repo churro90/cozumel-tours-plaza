@@ -17,6 +17,7 @@ $("#datepicker").datepicker(
        changeMonth: true,
        changeYear: true,
        defaultDate: +2,
+       dateFormat: "DD MM d, yy",
        minDate: datePlusTwo
        
       
@@ -39,7 +40,7 @@ $("#vehicleSelect").on( "change", function(){
 
 /*setear el numero de personas del vehículo dependiendo del vehiculo seleccionado*/
 $("#vehicleSelect").on( "change", function(){
-     if($("#vehicleSelect option:selected").val() === "car"){
+     if($("#vehicleSelect option:selected").val() === "Car"){
          $("#people").empty();
             for(var i=0; ++i; i<5){
                 $("#people").append($("<option>", {
@@ -48,7 +49,7 @@ $("#vehicleSelect").on( "change", function(){
             }));
             if(i===4) { break;}
         }  
-    }  else if($("#vehicleSelect option:selected").val() === "van"){
+    }  else if($("#vehicleSelect option:selected").val() === "Regular Van"){
          $("#people").empty();
         for(var i=4; ++i; i<10) {
             $("#people").append($("<option>", {
@@ -66,7 +67,7 @@ $("#vehicleSelect").on( "change", function(){
             }));
             if(i===10) { break; }
         }
-    }  else if($("#vehicleSelect option:selected").val() === "largerVan") {
+    }  else if($("#vehicleSelect option:selected").val() === "Larger Van") {
            $("#people").empty();
         for(var i=10; ++i; i<15) {
             $("#people").append($("<option>", {
@@ -95,12 +96,13 @@ var countries = [{"name":"Afghanistan","dial_code":"+93","code":"AF"},{"name":"A
 
 $("#country").on("change", function(){
     for (var i=0; i<countries.length;  i++){
-        if($("#country option:selected").val() === countries[i].code){
-            $("#code").text(countries[i].dial_code);
+        if($("#country option:selected").val() === countries[i].name){
+            $("#code").val(countries[i].dial_code);
+            break;
         }
     }
     if($("#country option:selected").val() === "null"){
-        $("#code").empty();
+        $("#code").val("");
     }
     
 });

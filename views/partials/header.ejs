@@ -12,6 +12,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/stylesheets/jquery-ui.min.css">
+        <script>
+          function alertar(node){
+            return alert("Hubo un error cargando la versión en español. Estamos trabajando en solucionarlo. Si necesitas ayuda en español no dudes en contactarnos");
+          }
+        </script>
         
         
   </head>
@@ -42,8 +47,9 @@
         <a class="nav-link" href="/booking"><i class="fa fa-book" aria-hidden="true"></i> Booking</a>
       </li>
     
+        
       <li class="nav-item">
-     <a class="nav-link disabled" href="#"><span class="flag flag-es"></span> Spanish Version</a>
+     <a class="nav-link disabled" href="#" onclick="return alertar(this);"><span class="flag flag-es"></span> Version en español</a>
       </li>
       <li class="nav-item">
      <a class="nav-link" href="/faq"><i class="fa fa-question" aria-hidden="true"></i> FAQ</a>
@@ -70,3 +76,5 @@
      
   </div>
 </nav> 
+
+

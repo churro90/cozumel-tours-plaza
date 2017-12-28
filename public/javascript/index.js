@@ -85,7 +85,7 @@ function topFunction() {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-$(function(){$("#myBtn").click(function(){$("html,body").animate({scrollTop:$(".top").offset().top},"1400");return false})})
+$(function(){$("#myBtn").click(function(){$("html,body").animate({scrollTop:$(".top").offset().top},"1200");return false})})
 
 //Popover
 
@@ -104,6 +104,8 @@ $(document).ready(function() {
     }
   });
 });
+
+
 
 
 

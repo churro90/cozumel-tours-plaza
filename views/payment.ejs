@@ -1,0 +1,110 @@
+<% include partials/header %>
+<div class="container flash">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+
+<div class="container">
+    
+    <h1>Reservation details:</h1>
+    <table class="table">
+  <thead>
+    <tr>
+     
+      </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Name</th>
+      <td><%= info.firstName %> <%= info.lastName %></td>
+      
+    </tr>
+    <tr>
+      <th scope="row">Email</th>
+      <td><%= info.email %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Date</th>
+      <td><%= info.date %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Starting time</th>
+      <td><%= info.startTime %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Service</th>
+      <td><%= info.vehicle %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row"># of People</th>
+      <td><%= info.people %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Country</th>
+      <td><%= info.country %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Cellphone</th>
+      <td><%= info.areaCode %><%= info.cellphone %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Comentaries</th>
+      <td><%= info.info %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Requirements</th>
+      <td><%= info.requirements %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Additionals</th>
+      <td><%= info.babySeat %></td>
+   
+    </tr>
+  </tbody>
+</table>
+    
+
+</div>
+<p class="text-center">You can pay now, or if you need additional details we can send you an invoice later. We will get in contact with you as soon as we can</p>
+<div class="container text-center paypal">
+    <% if(info.vehicle === "Car") { %>
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="BN2MGJM8XHKN8">
+            <input type="image" src="https://www.paypalobjects.com/en_US/MX/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+      </form>
+        <% } else { %>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="ZV9EKNR8L2AUW">
+            <input type="image" src="https://www.paypalobjects.com/en_US/MX/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
+
+    <% } %>
+
+</div>
+
+
+<% include partials/footer %>
+
+
+

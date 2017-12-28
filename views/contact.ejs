@@ -1,26 +1,41 @@
 <% include partials/header %>
 
+<div class="container flash">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+
 <div class="contact container">
-    <form id="contact">
+    <form id="contact" method="POST" action="/contact">
         <br>
         <h1 class="text-center"><strong>Contact Us</strong></h1>
+        
+           
       
                 <label for="name"><strong>Name *</strong></label>
-                <input type="text" id="name"  class="form-control" required>
+                <input type="text" id="name" name="name" class="form-control" required>
             
          <br>
             <div class="form-group">
                 <label for="email"><strong>Email *</strong></label>
-                <input type="email" id="email" class="form-control" required>
+                <input type="email" id="email" name="email" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="subject"><strong>Subject *</strong></label>
-                <input type="text" id="subject"  class="form-control" required>
+                <input type="text" id="subject" name="subject"  class="form-control" required>
             </div>
            
             <label for="message"><strong>Message *</strong></label>
              <div class="form-group">
-               <textarea id="message" rows="5" cols="136" required></textarea>
+               <textarea id="message" name="message" rows="5" cols="136" required></textarea>
              </div>
              
              <input type="submit" class="btn btn-lg btn-default btn-primary btn-block" value="Submit">
