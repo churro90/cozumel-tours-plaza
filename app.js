@@ -111,7 +111,7 @@ app.post("/booking", function(req, res) {
     // setup email data with unicode symbols
     let mailOptions = {
         from: process.env.GMAIL_ACCOUNT, // sender address
-        to:   "martin.carrascof@gmail.com", //process.env.RECEIVER, // list of receivers
+        to:   process.env.RECEIVER, // list of receivers
         subject: subject, // Subject line
         html: output // html body
     };
