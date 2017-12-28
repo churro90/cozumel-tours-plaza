@@ -18,13 +18,26 @@ $("#datepicker").datepicker(
        changeYear: true,
        defaultDate: +2,
        dateFormat: "DD MM d, yy",
-       minDate: datePlusTwo
+       minDate: datePlusTwo,
+       beforeShowDay: unavailable
        
       
     }
     );
+function unavailable(date){
+    var dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+    if(dmy != "1-1-2018"){
+        return [true, ""];
+    } else{
+        return [false, "", "Unavailable"];
+    }
+}
+
 /*inicializar el date picker como deshabilitado*/
 $("#datepicker").datepicker("disable");
+
+
+
 
 /*habilitar el datepicker una vez seleccionado el vehiculo*/
 $("#vehicleSelect").on( "change", function(){
