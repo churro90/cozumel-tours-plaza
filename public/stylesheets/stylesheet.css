@@ -600,3 +600,11 @@ body .popover {
 .r {
     font-size: 1.2rem;
 }
+
+/*=====================TERMS AND CONDITIONS PAGE======*/
+
+.terms{
+    padding-top: 15vh;
+    font-size: 1.5rem;
+    padding-bottom: 40vh;
+}

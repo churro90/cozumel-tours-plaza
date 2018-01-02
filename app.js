@@ -204,6 +204,10 @@ nodemailer.createTestAccount((err, account) => {
 app.get("/faq", function(req, res) {
     res.render("faq");
 });
+
+app.get("/terms-and-conditions", function(req, res) {
+   res.render("terms-and-conditions"); 
+});
  
     
 app.listen(process.env.PORT, process.env.IP, function(){
