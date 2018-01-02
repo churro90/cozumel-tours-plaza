@@ -7,10 +7,12 @@ var express       = require("express"),
     passport      = require("passport"),
     User          = require("./models/user"),
     mongoose      = require("mongoose"),
+    helmet        = require("helmet"),
     LocalStrategy = require("passport-local");
     
     
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(helmet());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 mongoose.connect(process.env.MONGODB); //definir como variable de ambiente!!!!!
