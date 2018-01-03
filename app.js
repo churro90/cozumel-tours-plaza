@@ -113,7 +113,8 @@ app.post("/booking", function(req, res) {
     // setup email data with unicode symbols
     let mailOptions = {
         from: process.env.GMAIL_ACCOUNT, // sender address
-        to:   process.env.RECEIVER, // list of receivers
+        to:   process.env.RECEIVER,
+        replyTo: req.body.email,// list of receivers
         subject: subject, // Subject line
         html: output // html body
     };
@@ -181,7 +182,8 @@ nodemailer.createTestAccount((err, account) => {
     // setup email data with unicode symbols
     let mailOptions = {
         from: process.env.GMAIL_ACCOUNT, // sender address
-        to:   process.env.RECEIVER, // list of receivers
+        to:   process.env.RECEIVER,
+        replyTo: email, // list of receivers
         subject: subject, // Subject line
         html: output // html body
     };
@@ -190,6 +192,7 @@ nodemailer.createTestAccount((err, account) => {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             req.flash("error", "There was an error submiting your form, please contact us directly at eduardoczm@gmail.com or try again");
+            console.log(error);
             return res.redirect("contact");
         } else {
        
