@@ -211,6 +211,16 @@ app.get("/faq", function(req, res) {
 app.get("/terms-and-conditions", function(req, res) {
    res.render("terms-and-conditions"); 
 });
+
+//=========ADMIN ROUTES==============
+
+app.get("/admin", function(req, res){
+    res.render("admin");
+});
+
+app.post("/admin", function(req, res) {
+   res.send("HOLA"); 
+});
  
     
 app.listen(process.env.PORT, process.env.IP, function(){
