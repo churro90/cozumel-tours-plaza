@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+        <!-- Bootstrap core CSS -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/dashboard.css" rel="stylesheet">
+
+    
+  </head>
+  
+  <body>
+<div class="container flash">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>    
+
+
+<div id="imprimir" class="container">
+     <a href="/tp-admin"><button class="btn btn-primary"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Volver</button></a>
+     <a href="/tp-admin/<%= reservation._id %>/edit"><button class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button></a>
+            <h1>Detalles de la reserva</h1>
+            <table class="table table-striped">
+          <thead>
+            <tr>
+             
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">ID de la Reserva</th>
+              <td><%= reservation._id %></td>
+            </tr>
+            <tr>
+              <th scope="row">Nombre</th>
+              <td><%= reservation.firstName %> <%= reservation.lastName %></td>
+              
+            </tr>
+            <tr>
+              <th scope="row">Email</th>
+              <td><%= reservation.email %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row">Fecha</th>
+              <td><%= moment(reservation.date).format("dddd MMMM DD, YYYY") %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row">Hora de inicio</th>
+              <td><%= reservation.startTime %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row">Servicio</th>
+              <td><%= reservation.vehicle %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row"># de personas</th>
+              <td><%= reservation.people %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row">Pais</th>
+              <td><%= reservation.country %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row">Celular</th>
+              <td><%= reservation.areaCode %><%= reservation.cellphone %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row">Comentarios</th>
+              <td><%= reservation.info %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row">Requerimientos</th>
+              <td><%= reservation.requirements %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row">Adicionales</th>
+             <% if(reservation.babySeat === "babySeat"){ %>
+                    <td> Baby Seat </td>
+               <% } else { %>
+               <td> </td>
+                <% } %>
+            </tr>
+          </tbody>
+        </table>
+        <a href="javascript:pruebaDivAPdf()" class="button">Pasar a PDF</a>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+    <script type="text/javascript" src="/javascript/admin.js"></script>
+    </body>
+    
+</html>

@@ -1,0 +1,104 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+
+    <title>Tours Plaza Admin</title>
+
+    <!-- Bootstrap core CSS -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Tours Plaza Administration</a>
+        
+      </nav>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#"><i class="fa fa-address-book" aria-hidden="true"></i> Reservaciones <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tp-admin/choferes"><i class="fa fa-user-plus" aria-hidden="true"></i> Choferes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tp-admin/vehiculos"><i class="fa fa-bus" aria-hidden="true"></i> Vehículos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a>
+            </li>
+          </ul>
+
+        </nav>
+
+        <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+          <h1>Reservaciones</h1>
+
+       
+          <h2>Section title</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Vehiculo</th>
+                  <th>Fecha</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Email</th>
+                  <th>Celular</th>
+                  <th>Ver detalles</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% reservations.forEach(function(reservation){ %>
+                  <tr>
+                  <td><%= reservation.vehicle %></td>
+                  <td><%= moment(reservation.date).format("dddd MMMM DD, YYYY")%></td>
+                  <td><%= reservation.firstName %></td>
+                  <td><%= reservation.lastName %></td>
+                  <td><%= reservation.email %></td>
+                  <td><%= reservation.areaCode %><%= reservation.cellphone %></td>
+                  <td class="text-center"><a href="tp-admin/<%= reservation._id %>"><i class="fa fa-2x fa-file-pdf-o" aria-hidden="true"></i></a></td>
+                  <td><a href="/tp-admin/<%= reservation._id %>/edit">Editar</a></td>
+                  </tr>
+               
+                <% }) %>
+                 
+               
+                
+              </tbody>
+            </table>
+          </div>
+        
+          
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+  </body>
+</html>

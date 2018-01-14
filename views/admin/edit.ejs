@@ -1,0 +1,165 @@
+
+
+ 
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+
+    <title>Tours Plaza Admin</title>
+
+    <!-- Bootstrap core CSS -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+         <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/stylesheets/jquery-ui.min.css">
+   
+             
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+      <div class="container flash">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+       
+<div class="container">   
+               
+ <form action="/tp-admin/<%= reservation._id %>?_method=PUT" method="POST">
+        <h1 style="text-align: center">Editar reserva de <%= reservation.firstName %> <%= reservation.lastName %></h1>
+        <h1 style="text-align: center">ID Reserva: <%= reservation._id %></h1>
+         <div class="form-group ">
+            <label for="vehicleSelect"><strong>Select Vehicle *</strong></label>
+                <select class="form-control" name="reservation[vehicle]" id="vehicleSelect" required>
+                  <option value="none" > </option>
+                  <option value="Car" <% if(reservation.vehicle === "Car") { %> selected <% } %> >Car (up to 4 guests)</option>
+                  <option value="Regular Van"  <% if(reservation.vehicle === "Regular Van") { %> selected <% } %> >Van (up to 9 guests)</option>
+                  <option value="xVan"  <% if(reservation.vehicle === "xVan") { %> selected <% } %>>xVan (up to 10 guests)</option>
+                  <option value="Larger Van"  <% if(reservation.vehicle === "Larger Van") { %> selected <% } %>>Larger Van (up to 14 guests)</option>
+                </select>
+          </div>
+            <div class="form-group">
+                <label for="datepicker"><strong>Select date *</strong> </label>
+                 <input id="datepicker" type="text" name="reservation[date]"  value="<%= moment(reservation.date).format("dddd MMMM DD, YYYY") %>" class="form-control" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="firstName"><strong>First Name *</strong></label>
+                <input type="text" id="firstName" name="reservation[firstName]" value="<%= reservation.firstName %>"  class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName"><strong>Last Name *</strong></label>
+                <input type="text" id="lastName" name="reservation[lastName]" value="<%= reservation.lastName %>" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email"><strong>Email *</strong></label>
+                <input type="email" id="email"  name="reservation[email]" value="<%= reservation.email %>" class="form-control" required>
+            </div>
+            <div class="form-group ">
+            <label for="timeSelect"><strong>Starting time *</strong></label>
+                <select class="form-control" id="timeSelect" name="reservation[startTime]"  required>
+                  <option value="7:30 AM"  <% if(reservation.startTime === "7:30 AM") { %> selected <% } %>>7:30 AM</option>
+                  <option value="8:00 AM"  <% if(reservation.startTime === "8:00 AM") { %> selected <% } %>>8:00 AM</option>
+                  <option value="8:30 AM"  <% if(reservation.startTime === "8:30 AM") { %> selected <% } %>>8:30 AM</option>
+                  <option value="9:00 AM"  <% if(reservation.startTime === "9:00 AM") { %> selected <% } %>>9:00 AM</option>
+                  <option value="9:30 AM"  <% if(reservation.startTime === "9:30 AM") { %> selected <% } %>>9:30 AM</option>
+                  <option value="10:00 AM" <% if(reservation.startTime === "10:00 AM") { %> selected <% } %> >10:00 AM</option>
+                  <option value="10:30 AM" <% if(reservation.startTime === "10:30 AM") { %> selected <% } %>>10:30 AM</option>
+                  <option value="11:00 AM" <% if(reservation.startTime === "11:00 AM") { %> selected <% } %>>11:00 AM</option>
+                  <option value="11:30 AM" <% if(reservation.startTime === "11:30 AM") { %> selected <% } %>>11:30 AM</option>
+                  <option value="12:00 PM" <% if(reservation.startTime === "12:00 PM") { %> selected <% } %>>12:00 PM</option>
+                  <option value="12:30 PM" <% if(reservation.startTime === "12:30 PM") { %> selected <% } %>>12:30 PM</option>
+                  <option value="13:00 PM" <% if(reservation.startTime === "1:00 PM") { %> selected <% } %>>1:00 PM</option>
+                  <option value="13:30 PM" <% if(reservation.startTime === "1:30 PM") { %> selected <% } %>>1:30 PM</option>
+                  <option value="14:00 PM" <% if(reservation.startTime === "2:00 PM") { %> selected <% } %>>2:00 PM</option>
+                  <option value="14:30 PM" <% if(reservation.startTime === "2:30 PM") { %> selected <% } %>>2:30 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "3:00 PM") { %> selected <% } %>>3:00 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "3:30 PM") { %> selected <% } %>>3:30 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "4:00 PM") { %> selected <% } %>>4:00 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "4:30 PM") { %> selected <% } %>>4:30 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "5:00 PM") { %> selected <% } %>>5:00 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "5:30 PM") { %> selected <% } %>>5:30 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "6:00 PM") { %> selected <% } %>>6:00 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "6:30 PM") { %> selected <% } %>>6:30 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "7:00 PM") { %> selected <% } %>>7:00 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "7:30 PM") { %> selected <% } %>>7:30 PM</option>
+                  <option value="15:00 PM" <% if(reservation.startTime === "8:00 PM") { %> selected <% } %>>8:00 PM</option>
+                </select>
+          </div>
+            <div class="form-group ">
+            <label for="people"><strong>Number of people *</strong></label>
+                <input type="text" class="form-control" id="people" name="reservation[people]" value="<%= reservation.people %>"  required>
+                
+          </div>
+          <label for="cruise"><strong>Hotel or ship? * </strong></label>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="reservation[arrival]" id="cruise" value="Cruise" <% if(reservation.arrival === "Cruise") { %> checked <% } %> > Cruise Ship
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="reservation[arrival]" id="hotel" value="Hotel" <% if(reservation.arrival === "Hotel") { %> checked <% } %> > Hotel in Cozumel
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="reservation[arrival]" id="playa" value="Playa del Carmen" <% if(reservation.arrival === "Playa del Carmen") { %> checked <% } %>> Coming from Playa del Carmen
+              </label>
+            </div>
+             <div class="form-group" style="padding-top: 12px">
+                <label for="nameHotelOrCruise"><strong>Name of the HOTEL or CRUISE* (if coming from Playa del Carmen just write PDC) </strong></label>
+                <input type="text" id="nameHotelOrCruise" name="reservation[hotelOrCruise]" value="<%= reservation.hotelOrCruise %>" class="form-control" required>
+             </div>
+                <div class="form-group ">
+            <label for="country"><strong>Choose your country</strong></label>
+                <input class="form-control" id="country" name="reservation[country]" value="<%= reservation.country %>" required>
+                </div>
+            <label for="cellphone"><strong>Cellphone</strong></label>
+            <div class="form-inline">
+                <div class="form-group"> 
+                    <input type="text" id="code" name="reservation[areaCode]" value="<%= reservation.areaCode %>" class="form-control text-center">
+                </div>
+                 <div class="form-group">
+                    <input type="tel" name="reservation[cellphone]" id="cellphone" value="<%= reservation.cellphone %>" class="form-control" required>
+                 </div>
+            </div>
+            <label for="info"><strong>Do you have an idea, more or less, of what you want to do or where you want to go during the tour? This information allows the driver/guide to plan a fun and informative day so you can enjoy every part of the tour. Please let us know.</strong></label>
+             <div class="form-group">
+               <textarea id="info" name="reservation[info]" value="<%= reservation.info %>" rows="5" cols="157"></textarea>
+             </div>
+            <label for="requirement"><strong>Do you have any special requirement or condition that the driver should know in order for you to have the best experience possible.</strong></label>
+             <div class="form-group">
+               <textarea id="requirement" name="reservation[requirements]" value="<%= reservation.requirements %>" rows="5" cols="157"></textarea>
+             </div>
+              <label for="babySeat"><strong>Do you need an additional item?</strong></label>
+             <div class="form-group">
+               <input type="checkbox" id="babySeat" name="reservation[babySeat]" value="babySeat" <% if(reservation.babySeat === "babySeat") { %> checked <% } %> > 1 baby seat USD $10
+             </div>
+             <input type="submit" class="btn btn-lg btn-default btn-primary btn-block" value="Edit">
+             <p>*Required fields</p>
+            </div>
+     </form>
+</div>     
+
+<script type="text/javascript" src="/javascript/jquery-ui.min.js"></script>
+ <script type="text/javascript" src="/javascript/admin.js"></script> 
+     </body>
+</html>
