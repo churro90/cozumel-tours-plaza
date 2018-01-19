@@ -11,7 +11,7 @@ router.use(express.static(__dirname + "/public"));
 //=========ADMIN ROUTES==============
 
 
-/*router.get("/", function(req, res){  // add in the get route middleware.isLoggedIn, just using it for production 
+router.get("/", function(req, res){  // add in the get route middleware.isLoggedIn, just using it for production 
     
     Reservation.find().sort({date: 1}).exec(function(err, allReservations){
        if(err){
@@ -67,7 +67,7 @@ router.put("/:id", function(req, res){
     //redirect show page
 });
 
-*/
+
 
 /* ============SE USO PARA CREAR 2 USUARIOS Y LUEGO DESHABILITAR===========
 
