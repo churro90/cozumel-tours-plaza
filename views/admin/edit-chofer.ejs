@@ -1,0 +1,30 @@
+<% include ../partials/admin-header %>
+
+<div class="container">
+    <div class="row"> 
+        <div class="col">
+        <h1 style="text-align: center;">Editar chofer</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/tp-admin/choferes/<%= chofer._id %>?_method=PUT" method="POST">
+                <label for="nombre"><strong>Nombre</strong></label>
+                <div class="form-group">
+                    <input class="form-control" id="nombre" type="text" name="chofer[nombre]" value="<%= chofer.nombre %>">
+                </div>
+                <label for="apellido"><strong>Apellido</strong></label>
+                <div class="form-group">
+                    <input class="form-control" id="apellido" type="text" name="chofer[apellido]" value="<%= chofer.apellido %>">
+                </div>
+                <label for="email"><strong>Email</strong></label>
+                <div class="form-group">
+                    <input class="form-control" id="email" type="email" name="chofer[email]" value="<%= chofer.email %>">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-default btn-primary btn-block">Edit</button>
+                </div>
+            </form>
+                 <a href="/tp-admin/choferes">Go back</a>
+                 </div>
+        </div>
+   
+    </div>
+</div>

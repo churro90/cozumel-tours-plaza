@@ -10,6 +10,7 @@ function addDays(date, days) {
 }
 
 var datePlusTwo = addDays(dateToday, 2);
+var disableDate = [];
 
 /*setear el datepicker 2 dias hacia adelante*/
 $("#datepicker").datepicker(
@@ -25,8 +26,9 @@ $("#datepicker").datepicker(
     }
     );
 function unavailable(date){
+    this.disableDate = disableDate
     var dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
-    if(dmy != "1-1-2018"){
+    if(dmy != disableDate){
         return [true, ""];
     } else{
         return [false, "", "Unavailable"];
@@ -82,6 +84,7 @@ $("#vehicleSelect").on( "change", function(){
         }
     }  else if($("#vehicleSelect option:selected").val() === "Larger Van") {
            $("#people").empty();
+           disableDate = ["2-3-2018"];
         for(var i=10; ++i; i<15) {
             $("#people").append($("<option>", {
                 value: i.toString(),

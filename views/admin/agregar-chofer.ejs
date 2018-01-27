@@ -1,0 +1,27 @@
+<% include ../partials/admin-header %>
+
+<div class="container">
+    <div class="row"> 
+        <div class="col">
+        <h1 style="text-align: center;">Agregar nuevo chofer</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/tp-admin/choferes" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="nombre" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="apellido" placeholder="Apellido">
+                </div>
+                <div class="form-group">
+                    <input class="form-control"  type="email" name="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-default btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+                 <a href="/tp-admin/choferes">Go back</a>
+                 </div>
+        </div>
+   
+    </div>
+</div>

@@ -40,8 +40,9 @@
         <% } %>
     </div>
        
-<div class="container">   
-               
+<div class="container"> 
+    <a href="/tp-admin"><button class="btn btn-primary"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Volver</button></a>
+       
  <form action="/tp-admin/<%= reservation._id %>?_method=PUT" method="POST">
         <h1 style="text-align: center">Editar reserva de <%= reservation.firstName %> <%= reservation.lastName %></h1>
         <h1 style="text-align: center">ID Reserva: <%= reservation._id %></h1>
