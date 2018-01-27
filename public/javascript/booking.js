@@ -55,6 +55,7 @@ $("#vehicleSelect").on( "change", function(){
 
 /*setear el numero de personas del vehículo dependiendo del vehiculo seleccionado*/
 $("#vehicleSelect").on( "change", function(){
+      disableDate = [];
      if($("#vehicleSelect option:selected").val() === "Car"){
          $("#people").empty();
             for(var i=0; ++i; i<5){
