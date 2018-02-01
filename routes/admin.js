@@ -2,6 +2,8 @@ var express      = require("express"),
     passport     = require("passport"),
   /*  middleware = require("./middleware"),*/
     moment       = require("moment"),
+    mongoose     = require("mongoose"),
+    Country     = require("../models/countries"),
     Reservation  = require("../models/reservation"),
     User         = require("../models/user"),
     Chofer       = require("../models/chofer"),
@@ -24,6 +26,18 @@ router.get("/", function(req, res){  // add in the get route middleware.isLogged
         }
     });
     
+});
+
+router.get("/agregar-reserva", function(req, res) {
+      Country.find({}, function(err, Countries){
+        if(err){
+            console.log(err);
+        } 
+        else {
+              res.render("admin/agregar-reserva", {countries: Countries});
+        }
+    });
+
 });
 
 //=====================CANCELAR RESERVA===================================

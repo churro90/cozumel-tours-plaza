@@ -1,0 +1,135 @@
+<% include ../partials/admin-header %>
+
+<div class="agregar-reserva container">
+    <div class="row">
+    <form id="booking" action="/booking" method="POST">
+        <h1 class="text-center"><strong>Book your vehicle</strong></h1>
+        <p class="border2">The cars take up to 4 passengers, but for comfort we recommend groups of 4 book a van, especially if anyone in the group is tall or large, so If you feel you will be unconfortable in the car, we can offer you a special 4 person Van price please <a href="/contact#subject=Special%20Price">contact us</a></p>
+         <div class="form-group ">
+            <label for="vehicleSelect"><strong>Select Vehicle *</strong></label>
+                <select class="form-control" name="vehicle" id="vehicleSelect" required>
+                  <option value="none" > </option>
+                  <option value="Car" >Car (up to 4 guests)</option>
+                  <option value="Regular Van" >Van (up to 9 guests)</option>
+                  <option value="xVan">xVan (up to 10 guests)</option>
+                  <option value="Larger Van">Larger Van (up to 14 guests)</option>
+                </select>
+          </div>
+            <div class="form-group">
+                <label for="datepicker"><strong>Select date *</strong> </label>
+                 <input id="datepicker" type="text" name="date" class="form-control" required>
+            </div>
+            
+
+            <div id="data">
+            <div class="form-group">
+                <label for="firstName"><strong>First Name *</strong></label>
+                <input type="text" id="firstName" name="firstName"  class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName"><strong>Last Name *</strong></label>
+                <input type="text" id="lastName" name="lastName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email"><strong>Email *</strong></label>
+                <input type="email" id="email"  name="email" class="form-control" required>
+            </div>
+            <div class="form-group ">
+            <label for="timeSelect"><strong>Starting time *</strong></label>
+                <select class="form-control" id="timeSelect" name="startTime" required>
+                  <option value="7:30 AM">7:30 AM</option>
+                  <option value="8:00 AM">8:00 AM</option>
+                  <option value="8:30 AM">8:30 AM</option>
+                  <option value="9:00 AM">9:00 AM</option>
+                  <option value="9:30 AM">9:30 AM</option>
+                  <option value="10:00 AM">10:00 AM</option>
+                  <option value="10:30 AM">10:30 AM</option>
+                  <option value="11:00 AM">11:00 AM</option>
+                  <option value="11:30 AM">11:30 AM</option>
+                  <option value="12:00 PM">12:00 PM</option>
+                  <option value="12:30 PM">12:30 PM</option>
+                  <option value="1:00 PM">1:00 PM</option>
+                  <option value="1:30 PM">1:30 PM</option>
+                  <option value="2:00 PM">2:00 PM</option>
+                  <option value="2:30 PM">2:30 PM</option>
+                  <option value="3:00 PM">3:00 PM</option>
+                  <option value="3:30 PM">3:30 PM</option>
+                  <option value="4:00 PM">4:00 PM</option>
+                  <option value="4:30 PM">4:30 PM</option>
+                  <option value="5:00 PM">5:00 PM</option>
+                  <option value="5:30 PM">5:30 PM</option>
+                  <option value="6:00 PM">6:00 PM</option>
+                  <option value="6:30 PM">6:30 PM</option>
+                  <option value="7:00 PM">7:00 PM</option>
+                  <option value="7:30 PM">7:30 PM</option>
+                  <option value="8:00 PM">8:00 PM</option>
+                </select>
+          </div>
+            <div class="form-group ">
+            <label for="people"><strong>Number of people *</strong></label>
+                <select class="form-control" id="people" name="people" required>
+                </select>
+          </div>
+          <label for="cruise"><strong>Hotel or ship? * </strong></label>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="arrival" id="cruise" value="Cruise" checked="checked"> Cruise Ship
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="arrival" id="hotel" value="Hotel"> Hotel in Cozumel
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="arrival" id="playa" value="Playa del Carmen"> Coming from Playa del Carmen
+              </label>
+            </div>
+             <div class="form-group" style="padding-top: 12px">
+                <label for="nameHotelOrCruise"><strong>Name of the HOTEL or name of the CRUISESHIP* (if coming from Playa del Carmen just write PDC) </strong></label>
+                <input type="text" id="nameHotelOrCruise" name="hotelOrCruise" class="form-control" required>
+             </div>
+                <div class="form-group ">
+            <label for="country"><strong>Choose your country</strong></label>
+                <select class="form-control" id="country" name="country" required>
+                   <option value="null"></option>
+                   <% countries.forEach(function(country){ %>
+                    <option> <%= country.name %> </option>
+                      <% }); %>
+                </select>
+          </div>
+            <label for="cellphone"><strong>Cellphone</strong></label>
+            <div class="form-inline">
+                <div class="form-group"> 
+                    <input type="text" id="code" name="areaCode" class="form-control text-center" readonly>
+                </div>
+                 <div class="form-group">
+                    <input type="tel" name="cellphone" id="cellphone" class="form-control" required>
+                 </div>
+            </div>
+            <label for="info"><strong>Do you have an idea, more or less, of what you want to do or where you want to go during the tour? This information allows the driver/guide to plan a fun and informative day so you can enjoy every part of the tour. Please let us know.</strong></label>
+             <div class="form-group">
+               <textarea id="info" name="info" rows="5" cols="157"></textarea>
+             </div>
+            <label for="requirement"><strong>Do you have any special requirement or condition that the driver should know in order for you to have the best experience possible.</strong></label>
+             <div class="form-group">
+               <textarea id="requirement" name="requirements" rows="5" cols="157"></textarea>
+             </div>
+              <label for="babySeat"><strong>Do you need an additional item?</strong></label>
+             <div class="form-group">
+               <input type="checkbox" id="babySeat" name="babySeat" value="babySeat"> 1 baby seat USD $10
+             </div>
+             <strong>By submiting, you are accepting our <a href="/terms-and-conditions">terms and conditions</a></strong>
+             <input type="submit" class="btn btn-lg btn-default btn-primary btn-block" value="Submit">
+             <p>*Required fields</p>
+            </div>
+     </form>
+    </div> 
+ </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="/javascript/jquery-ui.min.js"></script>
