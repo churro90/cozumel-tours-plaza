@@ -13,7 +13,7 @@ router.use(express.static(__dirname + "/public"));
 //=========ADMIN ROUTES==============
 
 
-/*router.get("/", function(req, res){  // add in the get route middleware.isLoggedIn, just using it for production 
+router.get("/", function(req, res){  // add in the get route middleware.isLoggedIn, just using it for production 
     
     Reservation.find().sort({date: 1}).exec(function(err, allReservations){
        if(err){
@@ -186,4 +186,4 @@ router.post("/register", function(req, res) {
  
     
     
-module.exports = router;*/
+module.exports = router;
