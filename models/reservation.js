@@ -15,7 +15,8 @@ var reservationSchema = new mongoose.Schema({
         cellphone     : String,
         info          : String,
         requirements  : String,
-        babySeat      : String
+        babySeat      : String,
+        estado        : String
         
 });
 

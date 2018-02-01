@@ -66,12 +66,13 @@ router.post("/booking", function(req, res) {
         cellphone     = req.body.cellphone,
         info          = req.body.info,
         requirements  = req.body.requirements,
-        babySeat      = req.body.babySeat;
+        babySeat      = req.body.babySeat,
+        estado        = "Por confirmar";
         
     var newReservation = { firstName: firstName, lastName: lastName, email: email, date: date, startTime: startTime,
                            arrival: arrival, hotelOrCruise: hotelOrCruise, vehicle: vehicle, people: people, 
                            country: country, areaCode: areaCode, cellphone: cellphone, info: info, 
-                           requirements: requirements, babySeat: babySeat};
+                           requirements: requirements, babySeat: babySeat, estado: estado};
     Reservation.create(newReservation, function(err, newlyCreated){
        if(err){
            console.log(err);
@@ -97,7 +98,7 @@ router.post("/booking", function(req, res) {
     // setup email data with unicode symbols
     let mailOptions = {
         from: process.env.GMAIL_ACCOUNT, // sender address
-        to:  process.env.RECEIVER,
+        to:  "martin.carrascof@gmail.com",//process.env.RECEIVER,
         replyTo: req.body.email,// list of receivers
         subject: subject, // Subject line
         html: output // html body

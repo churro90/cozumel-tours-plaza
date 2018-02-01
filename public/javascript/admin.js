@@ -1,4 +1,10 @@
-
+   //Get entire table
+    var table = document.getElementById("data");
+    
+    //Get <td> with class date from table
+    
+    var reservas = table.querySelectorAll("tr.reserva");
+    
 $('.confirm').click(function(e)
 {
     if(confirm("Estás seguro?"))
@@ -41,9 +47,38 @@ $("#datepicker").datepicker(
     {
        changeMonth: true,
        changeYear: true,
-       defaultDate: +2,
-       dateFormat: "DD MM d, yy"
+       defaultDate: 0,
+       dateFormat: "DD MM dd, yy"
      /*  minDate: datePlusTwo //Permite setear la fecha minima en 2 días más */
     }
     );
 
+    //Get input 
+
+$("#datepicker").on("change", function(){
+    var filterValue = document.getElementById("datepicker").value;
+ 
+    
+    //loop through td-date list
+    
+    for(var i=0; i < reservas.length; i++){
+        var date = reservas[i].getElementsByClassName("date")[0];
+        //If matched
+        if(date.innerHTML === filterValue){
+              reservas[i].style.display = "";
+        } else {
+              reservas[i].style.display = "none";
+        }
+    }
+   /* for(var i=0; i< reservas.length; i++){
+        var date = reservas[i].getElementsByClassName("date")[0];
+        if()
+    }*/
+});
+
+$("#eliminar").on("click", function(){
+   $("#datepicker").val("");
+   for(var i=0; i<reservas.length; i++){
+       reservas[i].style.display = "";
+   }
+});

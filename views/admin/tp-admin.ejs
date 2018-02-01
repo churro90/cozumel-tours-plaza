@@ -9,13 +9,13 @@
           <h1>Reservaciones</h1>
 
        
-          <form>
+       <!--   <form>-->
                <div class="form-group">
                 <label for="datepicker"><strong>Filtrar por fecha</strong> </label>
-                 <input id="datepicker" type="text" name="date" class="form-control">
-                 <button class="btn btn-success">Filtrar</button>
-              </div>
-          </form>
+                 <input id="datepicker" type="text" name="date" class="form-control" placeholder="Buscar por fecha...">
+                 <button class="btn btn-success" id="eliminar">Eliminar filtros</button>
+                </div>
+         <!-- </form>-->
           <div class="table-responsive">
             <table id="data" class="table table-stripe table-bordered table-sm">
               <thead>
@@ -34,9 +34,9 @@
               <tbody>
                 <% reservations.forEach(function(reservation){ %>
                 
-                  <tr>
+                  <tr class="reserva">
                   <td><%= reservation.vehicle %></td>
-                  <td><%= moment(reservation.date).format("dddd MMMM DD, YYYY")%></td>
+                  <td class="date"><%= moment(reservation.date).format("dddd MMMM DD, YYYY")%></td>
                   <td><%= reservation.firstName %></td>
                   <td><%= reservation.lastName %></td>
                   <td><%= reservation.email %></td>

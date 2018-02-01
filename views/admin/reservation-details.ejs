@@ -41,6 +41,7 @@
               </tr>
           </thead>
           <tbody>
+         <form>  
             <tr>
               <th scope="row">ID de la Reserva</th>
               <td><%= reservation._id %></td>
@@ -103,6 +104,31 @@
                <td> </td>
                 <% } %>
             </tr>
+            <tr>
+                <th scope="row">Asignar chofer</th>
+              <td>
+               
+                <div class="form-group">
+                  <select class="form-control" name="chofer" id="chofer" required>
+                  
+                   <% choferes.forEach(function(chofer) { %>
+                  <option value="<%= chofer.nombre %>"> <%= chofer.nombre %></option>
+                   <% }) %>
+                  </select>
+                </div>
+               
+              </td>  
+            </tr>
+            <tr>
+              <th scope="row">Asignar punto de salida</th>
+                <td>
+                  <div class="form-group">
+                    <input type="text" name="salida" class="form-control" required>
+                  </div>
+                </td>
+            
+            </tr>
+           </form>
           </tbody>
         </table>
 
