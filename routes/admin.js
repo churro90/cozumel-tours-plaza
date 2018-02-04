@@ -1,14 +1,15 @@
-var express      = require("express"),
-    passport     = require("passport"),
+var express               = require("express"),
+    passport              = require("passport"),
   /*  middleware = require("./middleware"),*/
-    moment       = require("moment"),
-    mongoose     = require("mongoose"),
-    Country     = require("../models/countries"),
-    Reservation  = require("../models/reservation"),
-    User         = require("../models/user"),
-    Chofer       = require("../models/chofer"),
-    Vehiculo     = require("../models/vehiculo"),
-    router       = express.Router();
+    moment                = require("moment"),
+    mongoose              = require("mongoose"),
+    Country               = require("../models/countries"),
+    Reservation           = require("../models/reservation"),
+    ConfirmedReservation  = require("../models/confirmed-reservation"),
+    User                  = require("../models/user"),
+    Chofer                = require("../models/chofer"),
+    Vehiculo              = require("../models/vehiculo"),
+    router                = express.Router();
 
 router.use(express.static(__dirname + "/public"));
 
@@ -40,6 +41,39 @@ router.get("/agregar-reserva", function(req, res) {
 
 });
 
+router.post("/agregar-reserva", function(req, res){
+    var firstName     = req.body.firstName,
+        lastName      = req.body.lastName,
+        email         = req.body.email,
+        date          = req.body.date,
+        startTime     = req.body.startTime,
+        arrival       = req.body.arrival,
+        hotelOrCruise = req.body.hotelOrCruise,
+        vehicle       = req.body.vehicle,
+        people        = req.body.people,
+        country       = req.body.country,
+        areaCode      = req.body.areaCode,
+        cellphone     = req.body.cellphone,
+        info          = req.body.info,
+        requirements  = req.body.requirements,
+        babySeat      = req.body.babySeat,
+        estado        = "Por confirmar";
+        
+   var newReservation = { firstName: firstName, lastName: lastName, email: email, date: date, startTime: startTime,
+                           arrival: arrival, hotelOrCruise: hotelOrCruise, vehicle: vehicle, people: people, 
+                           country: country, areaCode: areaCode, cellphone: cellphone, info: info, 
+                           requirements: requirements, babySeat: babySeat, estado: estado};
+    Reservation.create(newReservation, function(err, newlyCreated){
+       if(err){
+           console.log(err);
+       } else {
+           req.flash("success", "Reserva agregada con exito");
+           return res.redirect("/tp-admin");
+       }
+    
+    });
+});
+
 //=====================CANCELAR RESERVA===================================
 router.delete("/:id", function(req, res){
     Reservation.findByIdAndRemove(req.params.id, function(err){
@@ -55,7 +89,16 @@ router.delete("/:id", function(req, res){
 });
 
 router.get("/reservaciones-confirmadas", function(req, res) {
-   res.render("admin/reservaciones-confirmadas"); 
+   ConfirmedReservation.find().sort({date: 1}).exec(function(err, allConfirmedReservations){
+       if(err){
+           console.log(err);
+       } 
+        else {
+            res.render("admin/reservaciones-confirmadas", {confirmedReservations: allConfirmedReservations, moment: moment});
+        }
+    });
+    
+   
 });
 
 //=======================RUTAS PARA CHOFERES======================================
@@ -152,6 +195,47 @@ router.get("/:id", function(req, res) {
    })}) ;
 });
 
+router.post("/:id", function(req, res) {
+    var id            = req.body.id,
+        name          = req.body.name,
+        email         = req.body.email,
+        date          = req.body.date,
+        startTime     = req.body.startTime,
+        arrival       = req.body.arrival,
+        hotelOrCruise = req.body.hotelOrCruise,
+        vehicle       = req.body.vehicle,
+        people        = req.body.people,
+        country       = req.body.country,
+        celular       = req.body.celular,
+        info          = req.body.info,
+        requirements  = req.body.requirements,
+        babySeat      = req.body.babySeat,
+        chofer        = req.body.chofer,
+        salida        = req.body.salida,
+        estado        = "Confirmada";
+        
+   var newConfirmedReservation = { id: id, name: name , email: email, date: date, startTime: startTime,
+                           arrival: arrival, hotelOrCruise: hotelOrCruise, vehicle: vehicle, people: people, 
+                           country: country, celular: celular , info: info,requirements: requirements, 
+                           babySeat: babySeat, chofer: chofer, salida: salida, estado: estado};
+    ConfirmedReservation.create(newConfirmedReservation, function(err, newlyCreated){
+       if(err){
+           console.log(err);
+       } else {
+           Reservation.findByIdAndRemove(req.params.id,function(err){
+               if(err){
+                   console.log(err);
+               } else {
+                     req.flash("success", "Reserva confirmada con exito");
+                     return res.redirect("/tp-admin/reservaciones-confirmadas");
+               }
+           });
+         
+       }
+    
+    });
+});
+
 //==============EDIT RESERVATION ======================================
 
 router.get("/:id/edit", function(req, res) {
@@ -161,7 +245,7 @@ router.get("/:id/edit", function(req, res) {
 });
 
 router.put("/:id", function(req, res){
-    //find and update the correct campground
+    //find and update the correct reservation
     
     Reservation.findByIdAndUpdate(req.params.id, req.body.reservation, function(err, updatedReservation){
        if(err){

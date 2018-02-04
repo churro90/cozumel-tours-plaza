@@ -3,7 +3,53 @@
        document.getElementById("reservaciones-confirmadas").classList.add("active");
      
   </script>
+     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+          <h1>Reservaciones confirmadas</h1>
 
-
+ <div class="table-responsive">
+            <table id="data" class="table table-stripe table-bordered table-sm">
+              <thead>
+                <tr>
+                  <th>Vehiculo</th>
+                  <th>Fecha</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Celular</th>
+                  <th class="text-center"><i class="fa fa-cog" aria-hidden="true"></i></th>
+                
+                
+                </tr>
+              </thead>
+              <tbody>
+                <% confirmedReservations.forEach(function(confirmedReservation){ %>
+                
+                  <tr class="reserva">
+                  <td><%= confirmedReservation.vehicle %></td>
+                  <td class="date"><%= moment(confirmedReservation.date).format("dddd MMMM DD, YYYY")%></td>
+                  <td><%= confirmedReservation.name %></td>
+                  <td><%= confirmedReservation.email %></td>
+                  <td><%= confirmedReservation.celular %></td>
+                  <td style="width: 160px;"><a class="btn btn-primary" href="tp-admin/<%= confirmedReservation._id %>"><i class="fa fa-file-pdf-o " aria-hidden="true"></i></a>
+                                          <a class="btn btn-info"  href="/tp-admin/<%= confirmedReservation._id %>/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                          <form style="display: inline;" class="confirm" action="/tp-admin/<%= confirmedReservation._id %>/?_method=DELETE" method="POST">
+                                          <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                          </form>
+                  
+                  </td>                   
+                  </tr>
+                
+                <% }) %>
+                 
+               
+                
+              </tbody>
+            </table>
+           
+          </div>
+        
+          
+        </main>
+      </div>
+    </div>
 
 <% include ../partials/admin-footer %>

@@ -42,7 +42,7 @@
                   <td><%= reservation.lastName %></td>
                   <td><%= reservation.email %></td>
                   <td><%= reservation.areaCode %><%= reservation.cellphone %></td>
-                  <td style="width: 160px;"><a class="btn btn-primary" href="tp-admin/<%= reservation._id %>"><i class="fa fa-file-pdf-o " aria-hidden="true"></i></a>
+                  <td style="width: 160px;"><a class="btn btn-primary" href="tp-admin/<%= reservation._id %>"><i class="fa fa-info " aria-hidden="true"></i></a>
                                           <a class="btn btn-info"  href="/tp-admin/<%= reservation._id %>/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                           <form style="display: inline;" class="confirm" action="/tp-admin/<%= reservation._id %>/?_method=DELETE" method="POST">
                                           <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>

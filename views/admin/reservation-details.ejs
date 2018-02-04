@@ -41,67 +41,78 @@
               </tr>
           </thead>
           <tbody>
-         <form>  
+         <form action="/tp-admin/<%= reservation._id %>" method="POST">  
             <tr>
               <th scope="row">ID de la Reserva</th>
-              <td><%= reservation._id %></td>
+              <td><input type="hidden" name="id" value="<%= reservation._id %>"><%= reservation._id %></td>
+                  
             </tr>
             <tr>
               <th scope="row">Nombre</th>
-              <td><%= reservation.firstName %> <%= reservation.lastName %></td>
+              <td><input type="hidden" name="name" value="<%= reservation.firstName %> <%= reservation.lastName %>"><%= reservation.firstName %> <%= reservation.lastName %></td>
               
             </tr>
             <tr>
               <th scope="row">Email</th>
-              <td><%= reservation.email %></td>
+              <td><input type="hidden"  name="email" value="<%= reservation.email %>"> <%= reservation.email %></td>
            
             </tr>
             <tr>
               <th scope="row">Fecha</th>
-              <td><%= moment(reservation.date).format("dddd MMMM DD, YYYY") %></td>
+              <td><input type="hidden" name="date" value="<%= moment(reservation.date).format("dddd MMMM DD, YYYY") %>" ><%= moment(reservation.date).format("dddd MMMM DD, YYYY") %></td>
            
             </tr>
             <tr>
               <th scope="row">Hora de inicio</th>
-              <td><%= reservation.startTime %></td>
+              <td><input type="hidden" name="startTime" value="<%= reservation.startTime %>"> <%= reservation.startTime %></td>
            
             </tr>
             <tr>
               <th scope="row">Servicio</th>
-              <td><%= reservation.vehicle %></td>
+              <td><input type="hidden" name="vehicle" value="<%= reservation.vehicle %>"> <%= reservation.vehicle %></td>
            
             </tr>
             <tr>
               <th scope="row"># de personas</th>
-              <td><%= reservation.people %></td>
+              <td><input type="hidden" name="people" value="<%= reservation.people %>"><%= reservation.people %></td>
            
             </tr>
             <tr>
               <th scope="row">Pais</th>
-              <td><%= reservation.country %></td>
+              <td><input type="hidden" name="country" value="<%= reservation.country %>"><%= reservation.country %></td>
            
             </tr>
             <tr>
               <th scope="row">Celular</th>
-              <td><%= reservation.areaCode %><%= reservation.cellphone %></td>
+              <td><input type="hidden" name="celular" value="<%= reservation.areaCode %><%= reservation.cellphone %>"><%= reservation.areaCode %><%= reservation.cellphone %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row">Hotel o Crucero</th>
+              <td><input type="hidden" name="arrival" value="<%= reservation.arrival %>"><%= reservation.arrival %></td>
+           
+            </tr>
+            <tr>
+              <th scope="row">Nombre Hotel o Crucero</th>
+              <td><input type="hidden" name="hotelOrCruise" value="<%= reservation.hotelOrCruise %>"><%= reservation.hotelOrCruise %></td>
            
             </tr>
             <tr>
               <th scope="row">Comentarios</th>
-              <td><%= reservation.info %></td>
+              <td><input type="hidden" name="info" value="<%= reservation.info %>"><%= reservation.info %></td>
            
             </tr>
             <tr>
               <th scope="row">Requerimientos</th>
-              <td><%= reservation.requirements %></td>
+              <td><input type="hidden" name="requirements" value="<%= reservation.requirements %>"><%= reservation.requirements %></td>
            
             </tr>
             <tr>
               <th scope="row">Adicionales</th>
              <% if(reservation.babySeat === "babySeat"){ %>
-                    <td> Baby Seat </td>
+                    <td><input type="hidden" name="babySeat" value="<%= reservation.babySeat %>">Baby Seat </td>
                <% } else { %>
-               <td> </td>
+               <td><input type="hidden" name="babySeat" value=""> </td>
                 <% } %>
             </tr>
             <tr>
@@ -123,11 +134,29 @@
               <th scope="row">Asignar punto de salida</th>
                 <td>
                   <div class="form-group">
-                    <input type="text" name="salida" class="form-control" required>
+                    <% if(reservation.arrival === "Hotel") { %>
+                    <input type="text" name="salida" class="form-control" value="<%= reservation.arrival %> <%= reservation.hotelOrCruise %>" required>
+                    <% } else { %>
+                    <select class="form-control" name="salida" required>
+                      <option value="Puerto A">Puerto A</option>
+                      <option value="Puerto B">Puerto B</option>
+                      <option value="Puerto C">Puerto C</option>
+                      <option value="Puerto D">Puerto D</option>
+                    </select>
+                     <% } %>
+                    
                   </div>
                 </td>
             
             </tr>
+            <tr>
+              <th scope="row" style="float: right;"><i class="fa fa-3x fa-check-square"></i> </th>
+                <td>
+                  <input type="submit" class="btn btn-success btn-block" value="Confirm reservation"></input>
+                </td>
+             
+            </tr>
+         
            </form>
           </tbody>
         </table>

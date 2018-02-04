@@ -12,6 +12,27 @@
         <% } %>
     </div>
 
+<div class="container text-center paypal">
+  <p>To pay the advance deposit we ask to confirm, please click the payment button</p>
+    <% if(info.vehicle === "Car") { %>
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="BN2MGJM8XHKN8">
+            <input type="image" src="http://www.laborlullabies.com/wp-content/uploads/2017/04/paynow-labor-lullabies.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+      </form>
+        <% } else { %>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="ZV9EKNR8L2AUW">
+            <input type="image" src="http://www.laborlullabies.com/wp-content/uploads/2017/04/paynow-labor-lullabies.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
+
+    <% } %>
+
+</div>
+
 <div class="container">
     
     <h1>Reservation details:</h1>
@@ -82,25 +103,8 @@
     
 
 </div>
-<div class="container text-center paypal">
-    <% if(info.vehicle === "Car") { %>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="BN2MGJM8XHKN8">
-            <input type="image" src="https://www.paypalobjects.com/en_US/MX/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-      </form>
-        <% } else { %>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="ZV9EKNR8L2AUW">
-            <input type="image" src="https://www.paypalobjects.com/en_US/MX/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-        </form>
+<hr>
 
-    <% } %>
-
-</div>
 
 
 <% include partials/footer %>

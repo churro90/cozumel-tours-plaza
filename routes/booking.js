@@ -98,7 +98,7 @@ router.post("/booking", function(req, res) {
     // setup email data with unicode symbols
     let mailOptions = {
         from: process.env.GMAIL_ACCOUNT, // sender address
-        to:   process.env.RECEIVER,
+        to:   process.env.RECEIVER,  //"martin.carrascof@gmail.com", 
         replyTo: req.body.email,// list of receivers
         subject: subject, // Subject line
         html: output // html body
