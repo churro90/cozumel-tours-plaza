@@ -64,7 +64,7 @@
             </tr>
             <tr>
               <th scope="row">Hora de inicio</th>
-              <td><input type="hidden" name="startTime" value="<%= reservation.startTime %>"> <%= reservation.startTime %></td>
+              <td><input type="hidden" id="startTime" name="startTime" value="<%= reservation.startTime %>"> <%= reservation.startTime %></td>
            
             </tr>
             <tr>
@@ -137,17 +137,24 @@
                     <% if(reservation.arrival === "Hotel") { %>
                     <input type="text" name="salida" class="form-control" value="<%= reservation.arrival %> <%= reservation.hotelOrCruise %>" required>
                     <% } else { %>
-                    <select class="form-control" name="salida" required>
-                      <option value="Puerto A">Puerto A</option>
-                      <option value="Puerto B">Puerto B</option>
-                      <option value="Puerto C">Puerto C</option>
-                      <option value="Puerto D">Puerto D</option>
+                    <select class="form-control" id="salida" name="salida" required>
+                      <option value="International Pier">International Pier</option>
+                      <option value="Puerta Maya Pier">Puerta Maya Pier</option>
+                      <option value="Punta Langosta (DOWNTOWN)">Punta Langosta Pier (DOWNTOWN)</option>
+                      <option value="Ferry boat from Playa del Carmen">Ferry boat from Playa del Carmen</option>
                     </select>
                      <% } %>
                     
                   </div>
+              <tr>
                 </td>
-            
+                <th scope="row">Horario de salida Ferry</th>
+                <td>
+                  <div class="form-group">
+                    <input type="text" name="horarioFerry" class="form-control" placeholder="Solo ingresar si el cliente llega desde el Ferry de Playa del Carmen, ej: 8:30 AM">
+                  </div>
+                </td>
+              </tr>
             </tr>
             <tr>
               <th scope="row" style="float: right;"><i class="fa fa-3x fa-check-square"></i> </th>

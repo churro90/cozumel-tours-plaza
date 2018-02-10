@@ -17,7 +17,8 @@ var confirmedReservationSchema = new mongoose.Schema({
         babySeat      : String,
         estado        : String,
         chofer        : String,
-        salida        : String
+        salida        : String,
+        horarioFerry  : String
         
 });
 

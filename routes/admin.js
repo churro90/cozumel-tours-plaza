@@ -9,7 +9,13 @@ var express               = require("express"),
     User                  = require("../models/user"),
     Chofer                = require("../models/chofer"),
     Vehiculo              = require("../models/vehiculo"),
+    pdf                   = require("pdfkit"),
+    blobStream            = require("blob-stream"),
+    fs                    = require("fs"),
+    path                  = require("path"),
     router                = express.Router();
+    
+
 
 router.use(express.static(__dirname + "/public"));
 
@@ -101,6 +107,311 @@ router.get("/reservaciones-confirmadas", function(req, res) {
    
 });
 
+router.get("/reservaciones-confirmadas/:name-:id", function(req, res) {
+   ConfirmedReservation.findById(req.params.id, function(err, foundReservation){
+       if(err){
+           console.log(err);
+       } else {
+      
+           
+           var doc = new pdf;
+           var doc2 = new pdf;
+           var stream = doc.pipe(blobStream());
+           if(foundReservation.vehicle === "Car"){
+               var charge = "107.00";
+               var hourly = "25.00";
+               var advance = "62.00";
+           } else if(foundReservation.vehicle === "Regular Van") {
+               var charge = "195.00";
+               var hourly = "40.00";
+               var advance = "100.00";
+           } else if(foundReservation.vehicle === "xVan") {
+               var charge = "220.00";
+               var hourly = "45.00";
+               var advance = "100.00";
+           } else if(foundReservation.vechile ==="Larger Van"){
+               var charge = "300.00";
+               var hourly = "50.00";
+               var advance = "100.00";
+           }
+           var confirmation = `PLEASE PRINT OUT OR BRING A COPY ON YOUR ANDROID, IPHONE, SMARTPHONE OR TABLET OF THIS CONFIRMATION`;
+           var confirmationNumber = `CONFIRMATION NUMBER:${req.params.id.slice(-7).toUpperCase()}`;
+           var title              = `Hello ${foundReservation.name},`
+           
+           if(foundReservation.salida === "International Pier") {
+           var body               = `You are confirmed for a tour of Cozumel by Taxi (${foundReservation.vehicle}) on ${moment(foundReservation.date).format("dddd MMMM DD, YYYY")} starting at ${foundReservation.startTime} ship time
+
+You are (MOST LIKELY!) docking at ${foundReservation.salida.toUpperCase()}; ${foundReservation.chofer} will be at the head of the taxi line, so look for a man with a sign with your name, wearing a yellow cap!
+
+You are 99% for sure docking at the aforementioned ${foundReservation.salida}, but stuff happens so...
+
+If you dock at PUNTA LANGOSTA PIER (downtown), ${foundReservation.chofer} will be waiting for you at the head of the taxi line in front of the Sr. Frogs bar/restaurant, which is directly across the street from the pier.
+
+As you leave the pier, you will be obliged to take an escalator up to the 2nd floor of the mall (so the store owners get foot traffic). You have to make your way back to the ground floor again, but it's a small mall, you won't get lost. There is another taxi line at the back of the mall, but just ignore it ${foundReservation.chofer} is waiting for you in front of Sr. Frogs!
+
+If you dock at Carnival's PUERTA MAYA PIER, ${foundReservation.chofer} is not allowed a sign there; he'll be at the head of the taxi line as you leave the pier shopping area.
+
+Payment is due in cash (USD Dollars, Euros or Pesos) at the end of your tour, ${foundReservation.chofer} accepts cash only as he has no way of verifying a credit card
+
+REMINDER: There is a USD $${charge}, 3 hour minimum charge for the tour + USD $${hourly} per each additional hour for the Tour... We received by PayPal the amount of USD $${advance} as an advance deposit and will be deducted from the balance at the end of the tour
+
+Thanks... ${foundReservation.chofer} and Eduardo / My Cell in Cozumel 987-119-6398
+
+IMPORTANT
+For our tour services, we request a permit for your pick up at the pier from the Taxi union authority, so we cannot allow any more people in the vehicle than the ones the tour was reserved for (even if there's room in the vehicle for more). We cannot add more people in the vehicle without previous 48 hrs approval, as it is very possible that taxi union delegate at the pier will not allow them to board the vehicle for the tour.
+
+We can refund the deposit in full with a written request by email, with at least two week notice. Within two weeks - 48 hours, a 50% refund will be given. All refunds will be effective 7 days after request. No refunds will be given if you cancel within 48 hours or for no-shows. Full refunds will be given in the event that your cruise ship does not make port.`
+           } else if (foundReservation.salida === "Puerta Maya Pier") {
+               var body = `You are confirmed for a tour of Cozumel by Taxi (${foundReservation.vehicle}) on ${moment(foundReservation.date).format("dddd MMMM DD, YYYY")} starting at ${foundReservation.startTime} ship time
+
+You are (MOST LIKELY!) docking at ${foundReservation.salida.toUpperCase()}; ${foundReservation.chofer} will be at the head of the taxi line, so look for a man with a sign with your name, wearing a yellow cap!
+
+    You are 99% for sure docking at the aforementioned ${foundReservation.salida.toUpperCase()}, but stuff happens so...
+    
+If you dock at Royal Caribbean's INTERNATIONAL PIER, Leo will be at the head of the taxi line with a sign with your name.
+
+If you dock at PUNTA LANGOSTA PIER (downtown), ${foundReservation.chofer} will be waiting for you at the head of the taxi line in front of the Sr. Frogs bar/restaurant, which is directly across the street from the pier.
+
+As you leave the pier, you will be obliged to take an escalator up to the 2nd floor of the mall (so the store owners get foot traffic). You have to make your way back to the ground floor again, but it's a small mall, you won't get lost. There is another taxi line at the back of the mall, but just ignore it ${foundReservation.chofer} is waiting for you in front of Sr. Frogs!
+
+
+Payment is due in cash (USD Dollars, Euros or Pesos) at the end of your tour, ${foundReservation.chofer} accepts cash only as he has no way of verifying a credit card
+
+REMINDER: There is a USD $${charge}, 3 hour minimum charge for the tour + USD $${hourly} per each additional hour for the Tour... We received by PayPal the amount of USD $${advance} as an advance deposit and will be deducted from the balance at the end of the tour
+
+Thanks... ${foundReservation.chofer} and Eduardo / My Cell in Cozumel 987-119-6398
+
+IMPORTANT
+
+For our tour services, we request a permit for your pick up at the pier from the Taxi union authority, so we cannot allow any more people in the vehicle than the ones the tour was reserved for (even if there's room in the vehicle for more). We cannot add more people in the vehicle without previous 48 hrs approval, as it is very possible that taxi union delegate at the pier will not allow them to board the vehicle for the tour.
+
+We can refund the deposit in full with a written request by email, with at least two week notice. Within two weeks - 48 hours, a 50% refund will be given. All refunds will be effective 7 days after request. No refunds will be given if you cancel within 48 hours or for no-shows. Full refunds will be given in the event that your cruise ship does not make port.`;
+           } else if(foundReservation.salida === "Punta Langosta (DOWNTOWN)") {
+                              var body = `You are confirmed for a tour of Cozumel by Taxi (${foundReservation.vehicle}) on ${moment(foundReservation.date).format("dddd MMMM DD, YYYY")} starting at ${foundReservation.startTime} ship time
+
+You are (MOST LIKELY!) docking at ${foundReservation.salida.toUpperCase()}; ${foundReservation.chofer} will be waiting for you holding a sign with your name, wearing a yellow cap at the head of the taxi line in front of the Sr. Frogs bar/restaurant, which is directly across the street from the pier.
+As you leave the pier, you will be obliged to take an escalator up to the 2nd floor of the mall (so the store owners get foot traffic). You have to make your way back to the ground floor again, but it's a small mall, you won't get lost. There is another taxi line at the back of the mall, but just ignore it ${foundReservation.chofer} is waiting for you in front of Sr. Frogs!
+
+    You are 99% for sure docking at the aforementioned ${foundReservation.salida.toUpperCase()}, but stuff happens so...
+    
+If you dock at Royal Caribbean's INTERNATIONAL PIER, Leo will be at the head of the taxi line with a sign with your name.
+
+If you dock at PUNTA LANGOSTA PIER (downtown), ${foundReservation.chofer} will be waiting for you at the head of the taxi line in front of the Sr. Frogs bar/restaurant, which is directly across the street from the pier.
+
+Payment is due in cash (USD Dollars, Euros or Pesos) at the end of your tour, ${foundReservation.chofer} accepts cash only as he has no way of verifying a credit card
+
+REMINDER: There is a USD $${charge}, 3 hour minimum charge for the tour + USD $${hourly} per each additional hour for the Tour... We received by PayPal the amount of USD $${advance} as an advance deposit and will be deducted from the balance at the end of the tour
+
+Thanks... ${foundReservation.chofer} and Eduardo / My Cell in Cozumel 987-119-6398
+
+IMPORTANT
+
+For our tour services, we request a permit for your pick up at the pier from the Taxi union authority, so we cannot allow any more people in the vehicle than the ones the tour was reserved for (even if there's room in the vehicle for more). We cannot add more people in the vehicle without previous 48 hrs approval, as it is very possible that taxi union delegate at the pier will not allow them to board the vehicle for the tour.
+
+We can refund the deposit in full with a written request by email, with at least two week notice. Within two weeks - 48 hours, a 50% refund will be given. All refunds will be effective 7 days after request. No refunds will be given if you cancel within 48 hours or for no-shows. Full refunds will be given in the event that your cruise ship does not make port.`;
+           } else if (foundReservation.salida.slice(0,5) === "Hotel") {
+                  var body = `You are confirmed for a tour of Cozumel by Taxi (${foundReservation.vehicle}) on ${moment(foundReservation.date).format("dddd MMMM DD, YYYY")} starting at ${foundReservation.startTime} Local Cozumel Time
+
+${foundReservation.chofer} will meet you at ${foundReservation.salida} entrance main Lobby, he will be wearing a yellow cap.
+
+Payment is due in cash (USD Dollars, Euros or Pesos) at the end of your tour, ${foundReservation.chofer} accepts cash only as he has no way of verifying a credit card
+
+REMINDER: There is a USD $${charge}, 3 hour minimum charge for the tour + USD $${hourly} per each additional hour for the Tour... We received by PayPal the amount of USD $${advance} as an advance deposit and will be deducted from the balance at the end of the tour
+
+Thanks... ${foundReservation.chofer} and Eduardo / My Cell in Cozumel 987-119-6398
+
+IMPORTANT
+
+For our tour services, we request a permit for your pick up at the pier from the Taxi union authority, so we cannot allow any more people in the vehicle than the ones the tour was reserved for (even if there's room in the vehicle for more). We cannot add more people in the vehicle without previous 48 hrs approval, as it is very possible that taxi union delegate at the pier will not allow them to board the vehicle for the tour.
+
+We can refund the deposit in full with a written request by email, with at least two week notice. Within two weeks - 48 hours, a 50% refund will be given. All refunds will be effective 7 days after request. No refunds will be given if you cancel within 48 hours or for no-shows. Full refunds will be given in the event that your cruise ship does not make port.`;
+               
+           } else if (foundReservation.salida.slice(0,5) === "Ferry") {
+                var body = `You are confirmed for a tour of Cozumel by Taxi (${foundReservation.vehicle}) on ${moment(foundReservation.date).format("dddd MMMM DD, YYYY")} starting at ${foundReservation.startTime} Local Cozumel Time
+                
+You will have to take the ${foundReservation.horarioFerry} ${foundReservation.salida}
+
+${foundReservation.chofer} will meet you at the ferry pier under the swallow birds statue, so look for a man with a sign with your name wearing a yellow cap.
+
+Payment is due in cash (USD Dollars, Euros or Pesos) at the end of your tour, ${foundReservation.chofer} accepts cash only as he has no way of verifying a credit card
+
+REMINDER: There is a USD $${charge}, 3 hour minimum charge for the tour + USD $${hourly} per each additional hour for the Tour... We received by PayPal the amount of USD $${advance} as an advance deposit and will be deducted from the balance at the end of the tour
+
+Thanks... ${foundReservation.chofer} and Eduardo / My Cell in Cozumel 987-119-6398
+
+IMPORTANT
+
+For our tour services, we request a permit for your pick up at the pier from the Taxi union authority, so we cannot allow any more people in the vehicle than the ones the tour was reserved for (even if there's room in the vehicle for more). We cannot add more people in the vehicle without previous 48 hrs approval, as it is very possible that taxi union delegate at the pier will not allow them to board the vehicle for the tour.
+
+We can refund the deposit in full with a written request by email, with at least two week notice. Within two weeks - 48 hours, a 50% refund will be given. All refunds will be effective 7 days after request. No refunds will be given if you cancel within 48 hours or for no-shows. Full refunds will be given in the event that your cruise ship does not make port.`;
+               
+           }
+        if(foundReservation.arrival === "Cruise") {
+           doc.pipe(fs.createWriteStream(`public/hoja-cliente/${foundReservation.name}-${req.params.id.slice(-7).toUpperCase()}.pdf`));
+   
+              doc.image("public/assets/logo/logo.PNG",15,15, {
+                  fit: [231,287],
+                  scale: 0.65,
+                  align: "left"
+              })
+               .font('Times-Roman', 10)
+               .moveDown()
+               .fillColor("red")
+               .text(confirmation, 200, 50 , {
+                 width: 300,
+                 align: 'justify',
+                 height: 300
+               })
+               .text(confirmationNumber, 200, 85)
+               .fillColor("black")
+               ;
+               doc.font("Times-Roman", 15)
+               .text(title, 60, 160)
+               .fillColor("black");
+               doc.font("Times-Roman", 12)
+               .text(body.slice(0, body.indexOf("MOST")-1), 60, 180, {
+                   continued: true,
+                   align: "justify"
+               })
+               .fillColor("red")
+               .text(body.slice(body.indexOf("MOST")-1,body.indexOf("MOST")+13),{
+                   continued: true,
+                   align: "justify"
+               })
+               .fillColor("black")
+               .text(body.slice(body.indexOf("docking") - 1, body.indexOf("yellow cap")-1),{
+                   continued: true,
+                   align: "justify"
+               })
+               .fillColor("red")
+               .text(body.slice(body.indexOf("yellow cap")-1,body.indexOf("yellow cap")+11),{
+                    align: "justify",
+                    continued: true
+               });
+               
+               doc.fillColor("black")
+               .text(body.slice(body.indexOf("yellow cap")+11, body.indexOf("There is a USD")-1),{
+                   align: "justify"
+                        })
+               .fillColor("red")
+               .text(body.slice(body.indexOf("There is a USD"),body.indexOf("end of the tour")+15),{
+                   continued: true,
+                   align: "justify"
+               })
+               .fillColor("black")
+               .text(body.slice(body.indexOf("end of the tour")+15, body.indexOf("IMPORTANT")),{
+                   align: "justify"
+               })
+               .fillColor("red")
+               .text(body.slice(body.indexOf("IMPORTANT"), body.indexOf("IMPORTANT")+9),{
+                   continued: true,
+                   align: "justify"
+               })
+               .fillColor("black")
+               .text(body.slice(body.indexOf("IMPORTANT")+9)
+               );
+               
+            // end and display the document in the iframe to the right
+           
+            
+            doc.end();
+            res.contentType("application/pdf");
+            doc.pipe(res);
+            
+             doc2.pipe(fs.createWriteStream(`public/hoja-chofer/${foundReservation.chofer}-${req.params.id.slice(-7).toUpperCase()}.pdf`));
+   
+              doc2.image("public/assets/logo/logo.PNG",15,15, {
+                  fit: [231,287],
+                  scale: 0.65,
+                  align: "left"
+              })
+              .text("hola");
+              
+              doc2.end();
+              res.contentType("application/pdf");
+              doc2.pipe(res);
+            
+            
+        }  else if (foundReservation.arrival === "Hotel" || foundReservation.arrival === "Playa del Carmen") {
+               doc.pipe(fs.createWriteStream(`public/hoja-cliente/${foundReservation.name}-${req.params.id.slice(-7).toUpperCase()}.pdf`));
+   
+              doc.image("public/assets/logo/logo.PNG",15,15, {
+                  fit: [231,287],
+                  scale: 0.65,
+                  align: "left"
+              })
+               .font('Times-Roman', 10)
+               .moveDown()
+               .fillColor("red")
+               .text(confirmation, 200, 50 , {
+                 width: 300,
+                 align: 'justify',
+                 height: 300
+               })
+               .text(confirmationNumber, 200, 85)
+               .fillColor("black")
+               ;
+               doc.font("Times-Roman", 15)
+               .text(title, 60, 160)
+               .fillColor("black");
+               doc.font("Times-Roman", 12)
+               .text(body.slice(0, body.indexOf("yellow cap")-1), 60, 180, {
+                   continued: true,
+                   align: "justify"
+               })
+               .fillColor("red")
+               .text(body.slice(body.indexOf("yellow cap")-1,body.indexOf("yellow cap")+11),{
+                    align: "justify",
+                    continued: true
+               });
+               
+               doc.fillColor("black")
+               .text(body.slice(body.indexOf("yellow cap")+11, body.indexOf("There is a USD")-1),{
+                   align: "justify"
+                        })
+               .fillColor("red")
+               .text(body.slice(body.indexOf("There is a USD"),body.indexOf("end of the tour")+15),{
+                   continued: true,
+                   align: "justify"
+               })
+               .fillColor("black")
+               .text(body.slice(body.indexOf("end of the tour")+15, body.indexOf("IMPORTANT")),{
+                   align: "justify"
+               })
+               .fillColor("red")
+               .text(body.slice(body.indexOf("IMPORTANT"), body.indexOf("IMPORTANT")+9),{
+                   continued: true,
+                   align: "justify"
+               })
+               .fillColor("black")
+               .text(body.slice(body.indexOf("IMPORTANT")+9)
+               );
+               
+            // end and display the document in the iframe to the right
+           
+            
+            doc.end();
+            
+            res.contentType("application/pdf");
+            doc.pipe(res);
+        }        
+          
+       /*     var filePath = path.join(__dirname, `../public/pdf-files/${foundReservation.name}-${req.params.id}.pdf`);
+           
+           fs.ReadStream(filePath, function(err, data){
+               if(err) {
+                   console.log(err);
+                   console.log(__dirname);
+               } else {
+              res.contentType("application/pdf");
+              res.send(data); 
+              console.log(filePath);
+               }
+           });*/
+          
+       }
+   });
+});
 //=======================RUTAS PARA CHOFERES======================================
 router.get("/choferes", function(req, res){
     Chofer.find().exec(function(err, allChofers){
@@ -181,6 +492,16 @@ router.get("/vehiculos", function(req, res) {
 
 });
 
+router.get("/vehiculos/:id/edit", function(req, res){
+   Vehiculo.findById(req.params.id, function(err, foundVehiculo){
+       if(err){
+           console.log(err);
+       } else {
+           res.render("admin/editar-vehiculo", {vehiculo: foundVehiculo});
+       }
+   }) 
+});
+
 
 
 //================RESERVATION DETAILS==============================
@@ -212,12 +533,13 @@ router.post("/:id", function(req, res) {
         babySeat      = req.body.babySeat,
         chofer        = req.body.chofer,
         salida        = req.body.salida,
+        horarioFerry  = req.body.horarioFerry,
         estado        = "Confirmada";
         
    var newConfirmedReservation = { id: id, name: name , email: email, date: date, startTime: startTime,
                            arrival: arrival, hotelOrCruise: hotelOrCruise, vehicle: vehicle, people: people, 
                            country: country, celular: celular , info: info,requirements: requirements, 
-                           babySeat: babySeat, chofer: chofer, salida: salida, estado: estado};
+                           babySeat: babySeat, chofer: chofer, salida: salida, estado: estado, horarioFerry: horarioFerry};
     ConfirmedReservation.create(newConfirmedReservation, function(err, newlyCreated){
        if(err){
            console.log(err);

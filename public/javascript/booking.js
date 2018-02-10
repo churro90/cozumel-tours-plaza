@@ -57,6 +57,7 @@ $("#vehicleSelect").on( "change", function(){
 $("#vehicleSelect").on( "change", function(){
       disableDate = [];
      if($("#vehicleSelect option:selected").val() === "Car"){
+         disableDate = ["22-2-2018"];
          $("#people").empty();
             for(var i=0; ++i; i<5){
                 $("#people").append($("<option>", {

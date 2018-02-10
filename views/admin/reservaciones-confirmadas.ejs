@@ -13,9 +13,10 @@
                   <th>Vehiculo</th>
                   <th>Fecha</th>
                   <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Celular</th>
+                  <th>Hoja cliente</th>
+                  <th>Hoja chofer</th>
                   <th class="text-center"><i class="fa fa-cog" aria-hidden="true"></i></th>
+                  <th>Ejecutar reserva</th>
                 
                 
                 </tr>
@@ -27,15 +28,16 @@
                   <td><%= confirmedReservation.vehicle %></td>
                   <td class="date"><%= moment(confirmedReservation.date).format("dddd MMMM DD, YYYY")%></td>
                   <td><%= confirmedReservation.name %></td>
-                  <td><%= confirmedReservation.email %></td>
-                  <td><%= confirmedReservation.celular %></td>
-                  <td style="width: 160px;"><a class="btn btn-primary" href="tp-admin/<%= confirmedReservation._id %>"><i class="fa fa-file-pdf-o " aria-hidden="true"></i></a>
-                                          <a class="btn btn-info"  href="/tp-admin/<%= confirmedReservation._id %>/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                          <form style="display: inline;" class="confirm" action="/tp-admin/<%= confirmedReservation._id %>/?_method=DELETE" method="POST">
+                  <td class="text-center"><a target="_blank" class="btn btn-warning" href="/tp-admin/reservaciones-confirmadas/<%= confirmedReservation.name %>-<%= confirmedReservation._id %>"><i class="fa fa-file-pdf-o " aria-hidden="true" ></i></a></td>
+                  <td class="text-center"><a target="_blank" class="btn btn-primary" href="/tp-admin/reservaciones-confirmadas/<%= confirmedReservation.chofer %>-<%= confirmedReservation._id %>"><i class="fa fa-file-pdf-o " aria-hidden="true"></i></a></td>
+                  <td class="text-center">
+                                          <a class="btn btn-info"  href="/tp-admin/reservaciones-confirmadas/<%= confirmedReservation._id %>/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                          <form style="display: inline;" class="confirm" action="/tp-admin/reservaciones-confirmadas/<%= confirmedReservation._id %>/?_method=DELETE" method="POST">
                                           <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                           </form>
                   
-                  </td>                   
+                  </td>
+                  <td class="text-center"><a class="btn btn-success"><i class="fa fa-check"></i></a></td>
                   </tr>
                 
                 <% }) %>
