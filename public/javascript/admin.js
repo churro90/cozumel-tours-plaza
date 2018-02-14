@@ -76,6 +76,24 @@ $("#datepicker").on("change", function(){
     }*/
 });
 
+
+  $("#nombre").keyup(function(){
+    var filterValue = document.getElementById("nombre").value.toUpperCase();
+    
+
+    
+    for(var i=0; i<reservas.length; i++) {
+     var name = reservas[i].getElementsByClassName("name")[0];
+     var apellido = reservas[i].getElementsByClassName("apellido")[0];
+        
+         if(name.innerHTML.toUpperCase().indexOf(filterValue)> -1 || apellido.innerHTML.toUpperCase().indexOf(filterValue)>-1){
+            reservas[i].style.display = "";
+        } else {
+            reservas[i].style.display ="none";
+        }
+    }
+});
+
 $("#eliminar").on("click", function(){
    $("#datepicker").val("");
    for(var i=0; i<reservas.length; i++){

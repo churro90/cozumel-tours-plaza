@@ -13,6 +13,8 @@
                <div class="form-group">
                 <label for="datepicker"><strong>Filtrar por fecha</strong> </label>
                  <input id="datepicker" type="text" name="date" class="form-control" placeholder="Buscar por fecha...">
+                 <label for="nombre"><strong>Filtrar por nombre</strong></label>
+                 <input id="nombre" type="text" name="nombre" class="form-control" placeholder="Buscar por nombre">
                  <button class="btn btn-success" id="eliminar" style="margin-top: 15px;"><i class="fa fa-eraser"></i> Eliminar filtros</button>
                  <a href="/tp-admin/agregar-reserva"><button class="btn btn-success" id="agregar" style="float: right;margin-top: 15px;"><i class="fa fa-plus-square"></i> Agregar reserva</button></a>
                 </div>
@@ -38,8 +40,8 @@
                   <tr class="reserva">
                   <td><%= reservation.vehicle %></td>
                   <td class="date"><%= moment(reservation.date).format("dddd MMMM DD, YYYY")%></td>
-                  <td><%= reservation.firstName %></td>
-                  <td><%= reservation.lastName %></td>
+                  <td class="name"><a><%= reservation.firstName %></a></td>
+                  <td class="apellido"><%= reservation.lastName %></td>
                   <td><%= reservation.email %></td>
                   <td><%= reservation.areaCode %><%= reservation.cellphone %></td>
                   <td style="width: 160px;"><a class="btn btn-primary" href="tp-admin/<%= reservation._id %>"><i class="fa fa-info " aria-hidden="true"></i></a>

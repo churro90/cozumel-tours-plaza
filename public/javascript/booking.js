@@ -26,13 +26,18 @@ $("#datepicker").datepicker(
     }
     );
 function unavailable(date){
-    this.disableDate = disableDate
-    var dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
-    if(dmy != disableDate){
+    this.disableDate = disableDate;
+ /*   var dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+    for(var i=0; i<disableDate.length; i++) {
+    if(dmy != disableDate[i]){
         return [true, ""];
     } else{
         return [false, "", "Unavailable"];
     }
+}*/
+    var string = jQuery.datepicker.formatDate("d-m-yy", date);
+    return [disableDate.indexOf(string) == -1];
+    
 }
 
 /*inicializar el date picker como deshabilitado*/
@@ -57,7 +62,7 @@ $("#vehicleSelect").on( "change", function(){
 $("#vehicleSelect").on( "change", function(){
       disableDate = [];
      if($("#vehicleSelect option:selected").val() === "Car"){
-         disableDate = ["22-2-2018"];
+         disableDate = ["22-2-2018", "2-3-2018"];
          $("#people").empty();
             for(var i=0; ++i; i<5){
                 $("#people").append($("<option>", {

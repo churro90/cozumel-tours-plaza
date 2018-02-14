@@ -1,0 +1,53 @@
+<% include ../partials/admin-header %>
+  <script>
+       document.getElementById("reservaciones-ejecutadas").classList.add("active");
+     
+  </script>
+     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+          <h1>Reservaciones ejecutadas</h1>
+         <div class="form-group">
+                <label for="datepicker"><strong>Filtrar por fecha</strong> </label>
+                 <input id="datepicker" type="text" name="date" class="form-control" placeholder="Buscar por fecha...">
+                 <button class="btn btn-success" id="eliminar" style="margin-top: 15px;"><i class="fa fa-eraser"></i> Eliminar filtros</button>
+                </div>
+ <div class="table-responsive">
+            <table id="data" class="table table-stripe table-bordered table-sm">
+              <thead>
+                <tr>
+                  <th>Vehiculo</th>
+                  <th>Fecha</th>
+                  <th>Nombre cliente</th>
+                  <th>Chofer del tour</th>
+                  <th>ID reserva</th>
+              
+                
+                </tr>
+              </thead>
+              <tbody>
+                 
+                <% confirmedReservations.forEach(function(confirmedReservation){ %>
+                <% var confNumber = confirmedReservation._id %>
+                 <% if(confirmedReservation.estado === "Ejecutada") { %>
+                  <tr class="reserva">
+                  <td><%= confirmedReservation.vehicle %></td>
+                  <td class="date"><%= moment(confirmedReservation.date).format("dddd MMMM DD, YYYY")%></td>
+                  <td><%= confirmedReservation.name %></td>
+                  <td><%= confirmedReservation.chofer %></td>
+                  <td><%= confNumber.toString().slice(-7).toUpperCase() %></td>
+                  </tr>
+                <% } %>
+                <% }) %>
+                 
+               
+                
+              </tbody>
+            </table>
+           
+          </div>
+        
+          
+        </main>
+      </div>
+    </div>
+
+<% include ../partials/admin-footer %>

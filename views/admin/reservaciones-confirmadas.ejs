@@ -5,7 +5,11 @@
   </script>
      <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
           <h1>Reservaciones confirmadas</h1>
-
+               <div class="form-group">
+                <label for="datepicker"><strong>Filtrar por fecha</strong> </label>
+                 <input id="datepicker" type="text" name="date" class="form-control" placeholder="Buscar por fecha...">
+                 <button class="btn btn-success" id="eliminar" style="margin-top: 15px;"><i class="fa fa-eraser"></i> Eliminar filtros</button>
+               </div>
  <div class="table-responsive">
             <table id="data" class="table table-stripe table-bordered table-sm">
               <thead>
@@ -23,13 +27,13 @@
               </thead>
               <tbody>
                 <% confirmedReservations.forEach(function(confirmedReservation){ %>
-                
+                <% if(confirmedReservation.estado === "Confirmada") { %>
                   <tr class="reserva">
                   <td><%= confirmedReservation.vehicle %></td>
                   <td class="date"><%= moment(confirmedReservation.date).format("dddd MMMM DD, YYYY")%></td>
                   <td><%= confirmedReservation.name %></td>
-                  <td class="text-center"><a target="_blank" class="btn btn-warning" href="/tp-admin/reservaciones-confirmadas/<%= confirmedReservation.name %>-<%= confirmedReservation._id %>"><i class="fa fa-file-pdf-o " aria-hidden="true" ></i></a></td>
-                  <td class="text-center"><a target="_blank" class="btn btn-primary" href="/tp-admin/reservaciones-confirmadas/<%= confirmedReservation.chofer %>-<%= confirmedReservation._id %>"><i class="fa fa-file-pdf-o " aria-hidden="true"></i></a></td>
+                  <td class="text-center"><a target="_blank" class="btn btn-warning" href="/tp-admin/reservaciones-confirmadas/hoja-cliente/<%= confirmedReservation.name %>-<%= confirmedReservation._id %>"><i class="fa fa-file-pdf-o " aria-hidden="true" ></i></a></td>
+                  <td class="text-center"><a target="_blank" class="btn btn-primary" href="/tp-admin/reservaciones-confirmadas/hoja-chofer/<%= confirmedReservation.chofer %>-<%= confirmedReservation._id %>"><i class="fa fa-file-pdf-o " aria-hidden="true"></i></a></td>
                   <td class="text-center">
                                           <a class="btn btn-info"  href="/tp-admin/reservaciones-confirmadas/<%= confirmedReservation._id %>/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                           <form style="display: inline;" class="confirm" action="/tp-admin/reservaciones-confirmadas/<%= confirmedReservation._id %>/?_method=DELETE" method="POST">
@@ -37,9 +41,9 @@
                                           </form>
                   
                   </td>
-                  <td class="text-center"><a class="btn btn-success"><i class="fa fa-check"></i></a></td>
+                 <td class="text-center"><form style="display: inline;" action="/tp-admin/ejecutar-reserva/<%= confirmedReservation._id %>/?_method=PUT" method="POST"><button class="btn btn-success"><i class="fa fa-check"></i></button></form></td>
                   </tr>
-                
+                <% } %>
                 <% }) %>
                  
                

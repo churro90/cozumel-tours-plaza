@@ -107,7 +107,7 @@ router.get("/reservaciones-confirmadas", function(req, res) {
    
 });
 
-router.get("/reservaciones-confirmadas/:name-:id", function(req, res) {
+router.get("/reservaciones-confirmadas/hoja-cliente/:name-:id", function(req, res) {
    ConfirmedReservation.findById(req.params.id, function(err, foundReservation){
        if(err){
            console.log(err);
@@ -115,7 +115,6 @@ router.get("/reservaciones-confirmadas/:name-:id", function(req, res) {
       
            
            var doc = new pdf;
-           var doc2 = new pdf;
            var stream = doc.pipe(blobStream());
            if(foundReservation.vehicle === "Car"){
                var charge = "107.00";
@@ -318,19 +317,6 @@ We can refund the deposit in full with a written request by email, with at least
             res.contentType("application/pdf");
             doc.pipe(res);
             
-             doc2.pipe(fs.createWriteStream(`public/hoja-chofer/${foundReservation.chofer}-${req.params.id.slice(-7).toUpperCase()}.pdf`));
-   
-              doc2.image("public/assets/logo/logo.PNG",15,15, {
-                  fit: [231,287],
-                  scale: 0.65,
-                  align: "left"
-              })
-              .text("hola");
-              
-              doc2.end();
-              res.contentType("application/pdf");
-              doc2.pipe(res);
-            
             
         }  else if (foundReservation.arrival === "Hotel" || foundReservation.arrival === "Playa del Carmen") {
                doc.pipe(fs.createWriteStream(`public/hoja-cliente/${foundReservation.name}-${req.params.id.slice(-7).toUpperCase()}.pdf`));
@@ -412,6 +398,136 @@ We can refund the deposit in full with a written request by email, with at least
        }
    });
 });
+
+router.get("/reservaciones-confirmadas/hoja-chofer/:chofer-:id", function(req, res) {
+    ConfirmedReservation.findById(req.params.id, function(err, foundReservation){
+        if(err) {
+            console.log(err);
+        } else {
+             var doc2 = new pdf;
+                if(foundReservation.vehicle === "Car"){
+               var charge = "107.00";
+               var hourly = "25.00";
+               var advance = "62.00";
+           } else if(foundReservation.vehicle === "Regular Van") {
+               var charge = "195.00";
+               var hourly = "40.00";
+               var advance = "100.00";
+           } else if(foundReservation.vehicle === "xVan") {
+               var charge = "220.00";
+               var hourly = "45.00";
+               var advance = "100.00";
+           } else if(foundReservation.vechile ==="Larger Van"){
+               var charge = "300.00";
+               var hourly = "50.00";
+               var advance = "100.00";
+           }
+           var body = `
+Nombres:  ${foundReservation.name}
+                   
+Cel   ${foundReservation.celular}
+                   
+Fecha del servicio: ${moment(foundReservation.date).format("dddd MMMM DD, YYYY")}
+                   
+Tipo de servicio: ${foundReservation.vehicle}
+                   
+Pasajeros: ${foundReservation.people}
+               
+Hora de salida: ${foundReservation.startTime}
+                   
+Nombre del barco/hotel: ${foundReservation.salida}
+                   
+Deposito enviado:  $${advance}
+               
+Driver:  ${foundReservation.chofer}
+                   
+Comentarios: $${charge} + $${hourly} / son de ${foundReservation.country} / ${foundReservation.info}
+
+
+           `
+        var quality =   `
+Excellent                Good              Medium               Not good                Very Bad 
+
+Excelente                Bueno             Regular              Nada bueno              Pesimo 
+
+
+Nombre/name ___________________________________________
+
+Firma/sign  _____________________________________________
+
+Fecha/date  _____________________________________________
+        `
+        var footer = `
+Please do not forget to take all your belongings with you
+Por favor, no se olvide de llevar todas sus pertenencias
+        `
+           doc2.pipe(fs.createWriteStream(`public/hoja-chofer/${foundReservation.chofer}-${req.params.id.slice(-7).toUpperCase()}.pdf`));
+   
+              doc2.image("public/assets/logo/logo.PNG",15,15, {
+                  fit: [231,287],
+                  scale: 0.65,
+                  align: "left"
+              })
+               .font("Times-Roman", 15)
+               .text("RESERVACION", 350, 75, {
+                 width: 300,
+                 align: 'justify',
+                 height: 300
+               });
+               doc2.font("Times-Roman", 15)
+               .text(body, 60, 160, {
+                   align: "justify",
+                   continued: true
+               })
+               .font("Times-Roman", 11)
+               .text("How was your service? Como estuvo el servicio?",{
+               
+                   align: "left"
+               })
+               .text(quality, {
+                   continued: true,
+                   align: "justify"
+               })
+               .font("Times-Roman", 18)
+               .text(footer)
+              
+              doc2.end();
+              res.contentType("application/pdf");
+              doc2.pipe(res);
+           
+             
+        }
+    });
+});
+
+
+
+router.get("/reservaciones-ejecutadas", function(req, res) {
+     ConfirmedReservation.find().sort({date: 1}).exec(function(err, allConfirmedReservations){
+       if(err){
+           console.log(err);
+       } 
+        else {
+            res.render("admin/reservaciones-ejecutadas", {confirmedReservations: allConfirmedReservations, moment: moment});
+        }
+    });
+    
+   
+});
+
+router.put("/ejecutar-reserva/:id", function(req, res) {
+    ConfirmedReservation.findByIdAndUpdate(req.params.id, {$set: {estado: "Ejecutada"}}, function(err, raw){
+        if(err) {
+            console.log(err);
+        } else {
+         /*  req.flash("success", "Reserva ejecutada con exito");  */ 
+           req.flash("success", "Reserva ejecutada con exito");
+           res.redirect("/tp-admin/reservaciones-ejecutadas");
+        }
+    });
+  
+});
+   
 //=======================RUTAS PARA CHOFERES======================================
 router.get("/choferes", function(req, res){
     Chofer.find().exec(function(err, allChofers){
@@ -420,7 +536,7 @@ router.get("/choferes", function(req, res){
         } else {
                res.render("admin/choferes", {choferes: allChofers}); 
         }
-    })
+    });
 
 });
 
@@ -443,7 +559,7 @@ router.post("/choferes", function(req, res){
             req.flash("success", "Chofer agregado satisfactoriamente");
             res.redirect("/tp-admin/choferes");
         }
-    })
+    });
 });
 
 router.get("/choferes/:id/edit", function(req, res) {
@@ -462,7 +578,7 @@ router.put("/choferes/:id", function(req, res) {
          console.log(err);
      }  else{
             req.flash("success", "Chofer succesfully edited");
-           res.redirect("/tp-admin/choferes");
+            res.redirect("/tp-admin/choferes");
      }
    });
 });
@@ -499,7 +615,7 @@ router.get("/vehiculos/:id/edit", function(req, res){
        } else {
            res.render("admin/editar-vehiculo", {vehiculo: foundVehiculo});
        }
-   }) 
+   }); 
 });
 
 
