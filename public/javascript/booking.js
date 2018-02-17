@@ -91,7 +91,7 @@ $("#vehicleSelect").on( "change", function(){
         }
     }  else if($("#vehicleSelect option:selected").val() === "Larger Van") {
            $("#people").empty();
-           disableDate = ["2-3-2018", "22-2-2018"];
+           disableDate = ["2-3-2018", "23-2-2018"];
         for(var i=10; ++i; i<15) {
             $("#people").append($("<option>", {
                 value: i.toString(),
