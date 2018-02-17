@@ -1,7 +1,9 @@
 <% include ../partials/admin-header %>
   <script>
        document.getElementById("reservaciones-confirmadas").classList.add("active");
-     
+        //Get entire table
+
+    
   </script>
      <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
           <h1>Reservaciones confirmadas</h1>
@@ -41,7 +43,7 @@
                                           </form>
                   
                   </td>
-                 <td class="text-center"><form style="display: inline;" action="/tp-admin/ejecutar-reserva/<%= confirmedReservation._id %>/?_method=PUT" method="POST"><button class="btn btn-success"><i class="fa fa-check"></i></button></form></td>
+                 <td class="text-center"><form style="display: inline;" action="/tp-admin/ejecutar-reserva/<%= confirmedReservation._id %>/?_method=PUT" method="POST"><button class="btn btn-success ejecutar-reserva"><i class="fa fa-check"></i></button></form></td>
                   </tr>
                 <% } %>
                 <% }) %>
@@ -57,5 +59,11 @@
         </main>
       </div>
     </div>
-
+<script>
+        var table = document.getElementById("data");
+    
+    //Get <td> with class date from table
+    
+    var reservas = table.querySelectorAll("tr.reserva");
+</script>
 <% include ../partials/admin-footer %>

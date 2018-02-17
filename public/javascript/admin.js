@@ -1,10 +1,4 @@
-   //Get entire table
-    var table = document.getElementById("data");
-    
-    //Get <td> with class date from table
-    
-    var reservas = table.querySelectorAll("tr.reserva");
-    
+
 $('.confirm').click(function(e)
 {
     if(confirm("Estás seguro?"))
@@ -17,7 +11,7 @@ $('.confirm').click(function(e)
     }
 });
 
-$('.confirm-chofer').click(function(e)
+  $('.confirm-chofer').click(function(e)
 {
     if(confirm("Estás seguro?"))
     {
@@ -29,6 +23,17 @@ $('.confirm-chofer').click(function(e)
     }
 });
 
+  $('.ejecutar-reserva').click(function(e)
+{
+    if(confirm("Estás seguro?"))
+    {
+        alert('Reserva Ejecutada');
+    }
+    else
+    {
+        e.preventDefault();
+    }
+});
 
 var dateToday = new Date();
 
@@ -57,7 +62,7 @@ $("#datepicker").datepicker(
 
 $("#datepicker").on("change", function(){
     var filterValue = document.getElementById("datepicker").value;
- 
+   
     
     //loop through td-date list
     

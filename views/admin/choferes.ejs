@@ -1,6 +1,8 @@
 <% include ../partials/admin-header %>
 <script>
        document.getElementById("choferes").classList.add("active");
+
+
   </script>
 
         <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
@@ -30,8 +32,8 @@
                   <td><%= chofer.apellido %></td>
                   <td><%= chofer.email %></td>
                   <td class="text-center"><a class="btn btn-info" href="/tp-admin/choferes/<%= chofer._id %>/edit"  href=""><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                          <form style="display: inline;" class="confirm-chofer" action="/tp-admin/choferes/<%= chofer._id %>/?_method=DELETE" method="POST">
-                                          <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                          <form style="display: inline;" action="/tp-admin/choferes/<%= chofer._id %>/?_method=DELETE" method="POST">
+                                          <button class="btn btn-danger confirm-chofer"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                           </form>
                                         
                   </td>

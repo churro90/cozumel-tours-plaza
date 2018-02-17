@@ -1,7 +1,8 @@
 <% include ../partials/admin-header %>
   <script>
        document.getElementById("reservaciones-ejecutadas").classList.add("active");
-     
+         //Get entire table
+
   </script>
      <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
           <h1>Reservaciones ejecutadas</h1>
@@ -50,4 +51,12 @@
       </div>
     </div>
 
+<script>
+        var table = document.getElementById("data");
+    
+    //Get <td> with class date from table
+    
+    var reservas = table.querySelectorAll("tr.reserva");
+    
+</script>
 <% include ../partials/admin-footer %>

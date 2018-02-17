@@ -107,6 +107,39 @@ router.get("/reservaciones-confirmadas", function(req, res) {
    
 });
 
+router.get("/reservaciones-confirmadas/:id/edit", function(req, res) {
+   ConfirmedReservation.findById(req.params.id, function(err, foundReservation) {
+    if(err) {
+        console.log(err);
+    }  else {
+      res.render("admin/editar-reserva-confirmada", {confirmedReservation: foundReservation, moment:moment});  
+    }
+   });
+    
+});
+
+router.put("/reservaciones-confirmadas/:id", function(req, res) {
+   ConfirmedReservation.findByIdAndUpdate(req.params.id, req.body.confirmedReservation, function(err, updatedReservation){
+       if(err) {
+           console.log(err);
+       } else {
+           req.flash("success", "Reserva editada con éxito")
+           res.redirect("/tp-admin/reservaciones-confirmadas");
+       }
+   });
+});
+
+router.delete("/reservaciones-confirmadas/:id", function(req, res) {
+    ConfirmedReservation.findByIdAndRemove(req.params.id, function(err) {
+       if(err) {
+           console.log(err);
+       } else {
+           req.flash("success", "Reserva cancelada con éxito");
+           res.redirect("/tp-admin/reservaciones-confirmadas");
+       }
+    });
+});
+
 router.get("/reservaciones-confirmadas/hoja-cliente/:name-:id", function(req, res) {
    ConfirmedReservation.findById(req.params.id, function(err, foundReservation){
        if(err){

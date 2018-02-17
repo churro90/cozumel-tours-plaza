@@ -1,7 +1,4 @@
 
-
- 
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,8 +13,6 @@
     <!-- Bootstrap core CSS -->
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-         <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/stylesheets/jquery-ui.min.css">
    
              
@@ -45,7 +40,8 @@
        
  <form action="/tp-admin/<%= reservation._id %>?_method=PUT" method="POST">
         <h1 style="text-align: center">Editar reserva de <%= reservation.firstName %> <%= reservation.lastName %></h1>
-        <h1 style="text-align: center">ID Reserva: <%= reservation._id %></h1>
+        
+        <h1 style="text-align: center" >ID Reserva: <%= reservation._id %></h1>
          <div class="form-group ">
             <label for="vehicleSelect"><strong>Select Vehicle *</strong></label>
                 <select class="form-control" name="reservation[vehicle]" id="vehicleSelect" required>
@@ -160,7 +156,23 @@
      </form>
 </div>     
 
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="/javascript/jquery-ui.min.js"></script>
- <script type="text/javascript" src="/javascript/admin.js"></script> 
+<script>
+    $("#datepicker").datepicker(
+    {
+       changeMonth: true,
+       changeYear: true,
+       defaultDate: 0,
+       dateFormat: "DD MM dd, yy"
+     /*  minDate: datePlusTwo //Permite setear la fecha minima en 2 días más */
+    }
+    );
+    
+</script>
      </body>
 </html>
+

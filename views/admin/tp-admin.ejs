@@ -1,7 +1,8 @@
 <% include ../partials/admin-header %>
   <script>
        document.getElementById("reservaciones").classList.add("active");
-     
+        //Get entire table
+  
   </script>
 
 
@@ -70,5 +71,12 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+        var table = document.getElementById("data");
     
+    //Get <td> with class date from table
+    
+    var reservas = table.querySelectorAll("tr.reserva");
+    
+    </script>
 <% include ../partials/admin-footer %>
