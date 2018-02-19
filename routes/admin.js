@@ -607,7 +607,7 @@ router.get("/reservaciones-ejecutadas", middleware.isLoggedIn, function(req, res
            console.log(err);
        } 
         else {
-            res.render("admin/reservaciones-ejecutadas", middleware.isLoggedIn, {confirmedReservations: allConfirmedReservations, moment: moment});
+            res.render("admin/reservaciones-ejecutadas", {confirmedReservations: allConfirmedReservations, moment: moment});
         }
     });
     
