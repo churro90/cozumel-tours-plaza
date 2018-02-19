@@ -26,6 +26,9 @@
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/tp-admin">TP Administration</a>
+      
+      
+        
         
       </nav>
     </header>
@@ -44,13 +47,24 @@
               <a class="nav-link" id="reservaciones-ejecutadas" href="/tp-admin/reservaciones-ejecutadas"><i class="fa fa-check" aria-hidden="true"></i> Reservaciones ejecutadas </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" id="desactivar-fechas" href="/tp-admin/desactivar-fechas"><i class="fa fa-calendar-times-o" aria-hidden="true"></i> Desactivar fechas </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" id="choferes" href="/tp-admin/choferes"><i class="fa fa-user-plus" aria-hidden="true"></i> Choferes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="vehiculos" href="/tp-admin/vehiculos"><i class="fa fa-bus" aria-hidden="true"></i> Vehículos <span class="sr-only">(current)</span></a>
             </li>
+          </ul>
+          <hr>
+          <br>  <br>  <br>  <br>  <br>  <br>  <br>  
+          <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a>
+                 <a class="nav-link" href="#">SIGNED IN AS <%= currentUser.username %></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/tp-admin/logout"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a>
             </li>
           </ul>
       </div>

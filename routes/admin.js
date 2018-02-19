@@ -1,6 +1,6 @@
 var express               = require("express"),
     passport              = require("passport"),
-  /*  middleware = require("./middleware"),*/
+    middleware            = require("../middleware"),
     moment                = require("moment"),
     mongoose              = require("mongoose"),
     Country               = require("../models/countries"),
@@ -9,6 +9,10 @@ var express               = require("express"),
     User                  = require("../models/user"),
     Chofer                = require("../models/chofer"),
     Vehiculo              = require("../models/vehiculo"),
+    DisableDateCar        = require("../models/disableDateCar"),
+    DisableDateVan        = require("../models/disableDateVan"),
+    DisableDateXVan       = require("../models/disableDateXVan"),
+    DisableDateLargerVan  = require("../models/disableDateLargerVan"),
     pdf                   = require("pdfkit"),
     blobStream            = require("blob-stream"),
     fs                    = require("fs"),
@@ -22,7 +26,7 @@ router.use(express.static(__dirname + "/public"));
 //=========ADMIN ROUTES==============
 
 
-router.get("/", function(req, res){  // add in the get route middleware.isLoggedIn, just using it for production 
+router.get("/", middleware.isLoggedIn, function(req, res){  // add in the get route middleware.isLoggedIn, just using it for production 
     
     Reservation.find().sort({date: 1}).exec(function(err, allReservations){
        if(err){
@@ -35,7 +39,13 @@ router.get("/", function(req, res){  // add in the get route middleware.isLogged
     
 });
 
-router.get("/agregar-reserva", function(req, res) {
+router.get("/logout", middleware.isLoggedIn, function(req, res) {
+   req.logout();
+   req.flash("success", "Logout successfull");
+   return res.redirect("/admin");
+});
+
+router.get("/agregar-reserva", middleware.isLoggedIn, function(req, res) {
       Country.find({}, function(err, Countries){
         if(err){
             console.log(err);
@@ -47,7 +57,7 @@ router.get("/agregar-reserva", function(req, res) {
 
 });
 
-router.post("/agregar-reserva", function(req, res){
+router.post("/agregar-reserva", middleware.isLoggedIn, function(req, res){
     var firstName     = req.body.firstName,
         lastName      = req.body.lastName,
         email         = req.body.email,
@@ -79,9 +89,65 @@ router.post("/agregar-reserva", function(req, res){
     
     });
 });
+//=============================================================
+
+
+router.get("/desactivar-fechas", middleware.isLoggedIn, function(req, res) {
+   res.render("admin/desactivar-fecha", {moment: moment}); 
+});
+  
+router.post("/desactivar-fecha-auto", middleware.isLoggedIn, function(req, res) {
+    var fecha = req.body.date1;
+    var nuevaFecha = { date: fecha };
+    DisableDateCar.create(nuevaFecha, function(err, newDate){
+        if(err) {
+            console.log(err);
+        } else {
+            req.flash("success", "Fecha desactivada con exito");
+            return res.redirect("/tp-admin/desactivar-fechas");
+        }
+    });
+});
+router.post("/desactivar-fecha-van", middleware.isLoggedIn, function(req, res) {
+    var fecha = req.body.date2;
+    var nuevaFecha = { date: fecha };
+    DisableDateVan.create(nuevaFecha, function(err, newDate){
+        if(err) {
+            console.log(err);
+        } else {
+            req.flash("success", "Fecha desactivada con exito");
+            return res.redirect("/tp-admin/desactivar-fechas");
+        }
+    });
+});
+router.post("/desactivar-fecha-xVan", middleware.isLoggedIn, function(req, res) {
+    var fecha = req.body.date3;
+    var nuevaFecha = { date: fecha };
+    DisableDateXVan.create(nuevaFecha, function(err, newDate){
+        if(err) {
+            console.log(err);
+        } else {
+            req.flash("success", "Fecha desactivada con exito");
+            return res.redirect("/tp-admin/desactivar-fechas");
+        }
+    });
+});
+router.post("/desactivar-fecha-largerVan", middleware.isLoggedIn, function(req, res) {
+    var fecha = req.body.date4;
+    var nuevaFecha = { date: fecha };
+    DisableDateLargerVan.create(nuevaFecha, function(err, newDate){
+        if(err) {
+            console.log(err);
+        } else {
+            req.flash("success", "Fecha desactivada con exito");
+            return res.redirect("/tp-admin/desactivar-fechas");
+        }
+    });
+});
+
 
 //=====================CANCELAR RESERVA===================================
-router.delete("/:id", function(req, res){
+router.delete("/:id", middleware.isLoggedIn, function(req, res){
     Reservation.findByIdAndRemove(req.params.id, function(err){
        if(err) {
            req.flash("error", "Hubo un error cancelando la reserva, porfavor contacta al administrador");
@@ -94,7 +160,7 @@ router.delete("/:id", function(req, res){
     });
 });
 
-router.get("/reservaciones-confirmadas", function(req, res) {
+router.get("/reservaciones-confirmadas", middleware.isLoggedIn, function(req, res) {
    ConfirmedReservation.find().sort({date: 1}).exec(function(err, allConfirmedReservations){
        if(err){
            console.log(err);
@@ -107,7 +173,7 @@ router.get("/reservaciones-confirmadas", function(req, res) {
    
 });
 
-router.get("/reservaciones-confirmadas/:id/edit", function(req, res) {
+router.get("/reservaciones-confirmadas/:id/edit", middleware.isLoggedIn, function(req, res) {
    ConfirmedReservation.findById(req.params.id, function(err, foundReservation) {
     if(err) {
         console.log(err);
@@ -118,7 +184,7 @@ router.get("/reservaciones-confirmadas/:id/edit", function(req, res) {
     
 });
 
-router.put("/reservaciones-confirmadas/:id", function(req, res) {
+router.put("/reservaciones-confirmadas/:id", middleware.isLoggedIn, function(req, res) {
    ConfirmedReservation.findByIdAndUpdate(req.params.id, req.body.confirmedReservation, function(err, updatedReservation){
        if(err) {
            console.log(err);
@@ -129,7 +195,7 @@ router.put("/reservaciones-confirmadas/:id", function(req, res) {
    });
 });
 
-router.delete("/reservaciones-confirmadas/:id", function(req, res) {
+router.delete("/reservaciones-confirmadas/:id", middleware.isLoggedIn, function(req, res) {
     ConfirmedReservation.findByIdAndRemove(req.params.id, function(err) {
        if(err) {
            console.log(err);
@@ -140,7 +206,7 @@ router.delete("/reservaciones-confirmadas/:id", function(req, res) {
     });
 });
 
-router.get("/reservaciones-confirmadas/hoja-cliente/:name-:id", function(req, res) {
+router.get("/reservaciones-confirmadas/hoja-cliente/:name-:id", middleware.isLoggedIn, function(req, res) {
    ConfirmedReservation.findById(req.params.id, function(err, foundReservation){
        if(err){
            console.log(err);
@@ -432,7 +498,7 @@ We can refund the deposit in full with a written request by email, with at least
    });
 });
 
-router.get("/reservaciones-confirmadas/hoja-chofer/:chofer-:id", function(req, res) {
+router.get("/reservaciones-confirmadas/hoja-chofer/:chofer-:id", middleware.isLoggedIn, function(req, res) {
     ConfirmedReservation.findById(req.params.id, function(err, foundReservation){
         if(err) {
             console.log(err);
@@ -535,20 +601,20 @@ Por favor, no se olvide de llevar todas sus pertenencias
 
 
 
-router.get("/reservaciones-ejecutadas", function(req, res) {
+router.get("/reservaciones-ejecutadas", middleware.isLoggedIn, function(req, res) {
      ConfirmedReservation.find().sort({date: 1}).exec(function(err, allConfirmedReservations){
        if(err){
            console.log(err);
        } 
         else {
-            res.render("admin/reservaciones-ejecutadas", {confirmedReservations: allConfirmedReservations, moment: moment});
+            res.render("admin/reservaciones-ejecutadas", middleware.isLoggedIn, {confirmedReservations: allConfirmedReservations, moment: moment});
         }
     });
     
    
 });
 
-router.put("/ejecutar-reserva/:id", function(req, res) {
+router.put("/ejecutar-reserva/:id", middleware.isLoggedIn, function(req, res) {
     ConfirmedReservation.findByIdAndUpdate(req.params.id, {$set: {estado: "Ejecutada"}}, function(err, raw){
         if(err) {
             console.log(err);
@@ -560,9 +626,10 @@ router.put("/ejecutar-reserva/:id", function(req, res) {
     });
   
 });
-   
+
+
 //=======================RUTAS PARA CHOFERES======================================
-router.get("/choferes", function(req, res){
+router.get("/choferes", middleware.isLoggedIn, function(req, res){
     Chofer.find().exec(function(err, allChofers){
         if(err){
             console.log(err);
@@ -574,7 +641,7 @@ router.get("/choferes", function(req, res){
 });
 
 
-router.get("/choferes/agregar", function(req, res) {
+router.get("/choferes/agregar", middleware.isLoggedIn, function(req, res) {
    res.render("admin/agregar-chofer"); 
 });
 
@@ -595,7 +662,7 @@ router.post("/choferes", function(req, res){
     });
 });
 
-router.get("/choferes/:id/edit", function(req, res) {
+router.get("/choferes/:id/edit", middleware.isLoggedIn, function(req, res) {
     Chofer.findById(req.params.id, function(err, foundChofer){
        if(err){
            console.log(err);
@@ -605,7 +672,7 @@ router.get("/choferes/:id/edit", function(req, res) {
     });
 });
 
-router.put("/choferes/:id", function(req, res) {
+router.put("/choferes/:id", middleware.isLoggedIn, function(req, res) {
    Chofer.findByIdAndUpdate(req.params.id, req.body.chofer, function(err, updatedChofer){
      if(err){
          console.log(err);
@@ -616,7 +683,7 @@ router.put("/choferes/:id", function(req, res) {
    });
 });
 
-router.delete("/choferes/:id", function(req, res){
+router.delete("/choferes/:id", middleware.isLoggedIn,  function(req, res){
    Chofer.findByIdAndRemove(req.params.id, function(err){
       if(err){
           console.log(err);
@@ -630,7 +697,7 @@ router.delete("/choferes/:id", function(req, res){
 
 //=========================RUTAS PARA VEHICULOS=======================
 
-router.get("/vehiculos", function(req, res) {
+router.get("/vehiculos", middleware.isLoggedIn, function(req, res) {
     Vehiculo.find().exec(function(err, allVehiculos){
       if(err){
           console.log(err);
@@ -641,7 +708,7 @@ router.get("/vehiculos", function(req, res) {
 
 });
 
-router.get("/vehiculos/:id/edit", function(req, res){
+router.get("/vehiculos/:id/edit", middleware.isLoggedIn, function(req, res){
    Vehiculo.findById(req.params.id, function(err, foundVehiculo){
        if(err){
            console.log(err);
@@ -654,7 +721,7 @@ router.get("/vehiculos/:id/edit", function(req, res){
 
 
 //================RESERVATION DETAILS==============================
-router.get("/:id", function(req, res) {
+router.get("/:id", middleware.isLoggedIn, function(req, res) {
    Reservation.findById(req.params.id).exec(function(err, foundReservation){
       Chofer.find().sort({nombre: 1}).exec(function(err, allChofers){ 
        if(err) {
@@ -665,7 +732,7 @@ router.get("/:id", function(req, res) {
    })}) ;
 });
 
-router.post("/:id", function(req, res) {
+router.post("/:id", middleware.isLoggedIn, function(req, res) {
     var id            = req.body.id,
         name          = req.body.name,
         email         = req.body.email,
@@ -709,13 +776,13 @@ router.post("/:id", function(req, res) {
 
 //==============EDIT RESERVATION ======================================
 
-router.get("/:id/edit", function(req, res) {
+router.get("/:id/edit", middleware.isLoggedIn, function(req, res) {
    Reservation.findById(req.params.id, function(err, foundReservation){
      res.render("admin/edit", {reservation: foundReservation, moment: moment});  
    });
 });
 
-router.put("/:id", function(req, res){
+router.put("/:id", middleware.isLoggedIn, function(req, res){
     //find and update the correct reservation
     
     Reservation.findByIdAndUpdate(req.params.id, req.body.reservation, function(err, updatedReservation){
@@ -729,8 +796,6 @@ router.put("/:id", function(req, res){
     });
     //redirect show page
 });
-
-
 
 /* ============SE USO PARA CREAR 2 USUARIOS Y LUEGO DESHABILITAR===========
 

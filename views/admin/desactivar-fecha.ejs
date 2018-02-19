@@ -1,0 +1,51 @@
+<% include ../partials/admin-header %>
+  <script>
+       document.getElementById("desactivar-fechas").classList.add("active");
+        //Get entire table
+
+  </script>
+    
+    <div class="container">
+        <div class="row">
+            <div class="text-center col-sm-4 ml-sm-auto col-md-5 pt-3">
+                <h1>Car</h1>
+                <form action="/tp-admin/desactivar-fecha-auto" method="POST">
+                <label for="datepicker1"><strong>Elegir fecha</strong> </label>
+                <input id="datepicker1" type="text" name="date1" class="form-control" style="width: 85%; margin: 0 7.5%;" placeholder="Buscar por fecha...">
+                <button id="car" class="btn btn-success" style="width: 85%;">Desactivar fecha</button>
+                </form>
+            </div>
+            <div class="text-center col-sm-4 ml-sm-auto col-md-5 pt-3">
+                <h1>Van</h1>
+                <form action="/tp-admin/desactivar-fecha-van" method="POST">
+                <label for="datepicker2"><strong>Elegir fecha</strong> </label>
+                <input id="datepicker2" type="text" name="date2" class="form-control" style="width: 85%; margin: 0 7.5%;" placeholder="Buscar por fecha...">
+                <button class="btn btn-success" style="width: 85%;">Desactivar fecha</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-center col-sm-4 ml-sm-auto col-md-5 pt-3">
+                <h1>xVan</h1>
+                <form action="/tp-admin/desactivar-fecha-xVan" method="POST">
+                <label for="datepicker3"><strong>Elegir fecha</strong> </label>
+                <input id="datepicker3" type="text" name="date3" class="form-control" style="width: 85%; margin: 0 7.5%;" placeholder="Buscar por fecha...">
+                <button class="btn btn-success" style="width: 85%;">Desactivar fecha</button>
+                </form>
+            </div>
+            <div class="text-center col-sm-4 ml-sm-auto col-md-5 pt-3">
+                <h1>Larger Van</h1>
+                <form action="/tp-admin/desactivar-fecha-largerVan" method="POST">
+                <label for="datepicker4"><strong>Elegir fecha</strong> </label>
+                <input id="datepicker4" type="text" name="date4" class="form-control" style="width: 85%; margin: 0 7.5%;" placeholder="Buscar por fecha...">
+                <button class="btn btn-success" style="width: 85%;">Desactivar fecha</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<% include ../partials/admin-footer %>
+  <script type="text/javascript" src="/javascript/disable-date.js"></script>

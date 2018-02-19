@@ -21,7 +21,6 @@
                 <label for="datepicker"><strong>Select date *</strong> </label>
                  <input id="datepicker" type="text" name="date" class="form-control" required>
             </div>
-            
 
             <div id="data" class="invisible">
             <div class="form-group">
@@ -132,7 +131,60 @@
 
 
 
-
 <script type="text/javascript" src="/javascript/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/javascript/booking.js"></script>
+
+<script>
+
+    var disableDateCar = "<%= disableDateCar %>".split(",");
+    var disableDateVan = "<%= disableDateVan %>".split(",");
+    var disableDateXVan = "<%= disableDateXVan %>".split(",");
+    var disableDateLargerVan = "<%= disableDateLargerVan %>".split(",");
+/*$("#vehicleSelect").on( "change", function(){
+      var disableDate = [];
+     if($("#vehicleSelect option:selected").val() === "Car"){
+       disableDate = disableDateCar;
+            $("#people").empty();
+            for(var i=0; ++i; i<5){
+                $("#people").append($("<option>", {
+                value: i.toString(),
+                text: i.toString()
+            }));
+            if(i===4) { break;}
+        }  
+    }  else if($("#vehicleSelect option:selected").val() === "Regular Van"){
+        disableDate = disableDateVan;
+         $("#people").empty();
+        for(var i=4; ++i; i<10) {
+            $("#people").append($("<option>", {
+                value: i.toString(),
+                text: i.toString()
+            }));
+            if(i===9) { break; }
+        }
+    }  else if($("#vehicleSelect option:selected").val() === "xVan") {
+          disableDate = disableDateXVan;
+           $("#people").empty();
+        for(var i=9; ++i; i<11) {
+            $("#people").append($("<option>", {
+                value: i.toString(),
+                text: i.toString()
+            }));
+            if(i===10) { break; }
+        }
+    }  else if($("#vehicleSelect option:selected").val() === "Larger Van") {
+           $("#people").empty();
+           disableDate = disableDateLargerVan;
+        for(var i=10; ++i; i<15) {
+            $("#people").append($("<option>", {
+                value: i.toString(),
+                text: i.toString()
+            }));
+            if(i===14) { break; }
+        }
+    } 
+
+
+});*/</script>
+    
 <% include partials/footer %>

@@ -1,12 +1,16 @@
 
 
-var express     = require("express"),
-    router      = express.Router(),
-    Country     = require("../models/countries"),
-    Reservation = require("../models/reservation"),
-    nodemailer  = require("nodemailer"),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose");
+var express               = require("express"),
+    router                = express.Router(),
+    Country               = require("../models/countries"),
+    Reservation           = require("../models/reservation"),
+    DisableDateCar        = require("../models/disableDateCar"),
+    DisableDateVan        = require("../models/disableDateVan"),
+    DisableDateXVan       = require("../models/disableDateXVan"),
+    DisableDateLargerVan  = require("../models/disableDateLargerVan"),
+    nodemailer            = require("nodemailer"),
+    bodyParser            = require("body-parser"),
+    mongoose              = require("mongoose");
    
 
 
@@ -15,13 +19,46 @@ var express     = require("express"),
 
 router.get("/booking", function(req, res) {
     Country.find({}, function(err, Countries){
-        if(err){
+        if(err) { 
             console.log(err);
-        } 
-        else {
-            res.render("booking", {countries: Countries});
+        } else {
+      DisableDateCar.find({}, function(err, carDates){
+       DisableDateVan.find({}, function(err, vanDates){
+           DisableDateXVan.find({}, function(err, xVanDates){
+               DisableDateLargerVan.find({}, function(err, largerVanDates){
+              if(err){
+            console.log(err);
+        } else {
+            var disableDateCar  = [];
+            var disableDateVan  = [];
+            var disableDateXVan = [];
+            var disableDateLargerVan = [];
+            carDates.forEach(function(date){ 
+             disableDateCar.push(date.date); 
+              }); 
+            vanDates.forEach(function(date){ 
+             disableDateVan.push(date.date); 
+              }); 
+            xVanDates.forEach(function(date){ 
+             disableDateXVan.push(date.date); 
+              }); 
+            largerVanDates.forEach(function(date){ 
+             disableDateLargerVan.push(date.date); 
+              }); 
+       
+            res.render("booking", 
+            {countries: Countries, 
+            disableDateCar: disableDateCar,
+            disableDateVan: disableDateVan,
+            disableDateXVan:disableDateXVan,
+            disableDateLargerVan:disableDateLargerVan
+            });
         }
-    });
+       });
+   
+    }); }); });
+    
+      }});
     
 });
 

@@ -1,4 +1,6 @@
+
 var dateToday = new Date();
+
 
 
 
@@ -21,8 +23,6 @@ $("#datepicker").datepicker(
        dateFormat: "DD MM d, yy",
        minDate: datePlusTwo,
        beforeShowDay: unavailable
-       
-      
     }
     );
 function unavailable(date){
@@ -62,7 +62,7 @@ $("#vehicleSelect").on( "change", function(){
 $("#vehicleSelect").on( "change", function(){
       disableDate = [];
      if($("#vehicleSelect option:selected").val() === "Car"){
-         disableDate = ["22-2-2018", "2-3-2018"];
+       disableDate = disableDateCar;
          $("#people").empty();
             for(var i=0; ++i; i<5){
                 $("#people").append($("<option>", {
@@ -72,6 +72,7 @@ $("#vehicleSelect").on( "change", function(){
             if(i===4) { break;}
         }  
     }  else if($("#vehicleSelect option:selected").val() === "Regular Van"){
+        disableDate = disableDateVan;
          $("#people").empty();
         for(var i=4; ++i; i<10) {
             $("#people").append($("<option>", {
@@ -81,6 +82,7 @@ $("#vehicleSelect").on( "change", function(){
             if(i===9) { break; }
         }
     }  else if($("#vehicleSelect option:selected").val() === "xVan") {
+        disableDate = disableDateXVan;
            $("#people").empty();
         for(var i=9; ++i; i<11) {
             $("#people").append($("<option>", {
@@ -90,8 +92,9 @@ $("#vehicleSelect").on( "change", function(){
             if(i===10) { break; }
         }
     }  else if($("#vehicleSelect option:selected").val() === "Larger Van") {
+        disableDate = disableDateLargerVan;
            $("#people").empty();
-           disableDate = ["2-3-2018", "23-2-2018"];
+    /*       disableDate = ["2-3-2018", "23-2-2018"];*/
         for(var i=10; ++i; i<15) {
             $("#people").append($("<option>", {
                 value: i.toString(),
