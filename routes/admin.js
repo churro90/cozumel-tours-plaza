@@ -28,7 +28,7 @@ router.use(express.static(__dirname + "/public"));
 
 router.get("/", middleware.isLoggedIn, function(req, res){  // add in the get route middleware.isLoggedIn, just using it for production 
     
-    Reservation.find().sort({date: 1}).exec(function(err, allReservations){
+    Reservation.find().sort({_id: 1}).exec(function(err, allReservations){
        if(err){
            console.log(err);
        } 
