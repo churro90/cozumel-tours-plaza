@@ -35,8 +35,8 @@ nodemailer.createTestAccount((err, account) => {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: process.env.GMAIL_ACCOUNT, // generated ethereal user
-            pass: process.env.GMAIL_PASSWORD // generated ethereal password
+            user: "booking.toursplaza@gmail.com", // generated ethereal user
+            pass: "mc17856904k" // generated ethereal password
         },
         tls:{
             rejectUnauthorized: false
@@ -45,8 +45,8 @@ nodemailer.createTestAccount((err, account) => {
 
     // setup email data with unicode symbols
     let mailOptions = {
-        from: process.env.GMAIL_ACCOUNT, // sender address
-        to:   process.env.RECEIVER,
+        from: "booking.toursplaza@gmail.com", // sender address
+        to:   "eduardoczm@gmail.com",
         replyTo: email, // list of receivers
         subject: subject, // Subject line
         html: output // html body
