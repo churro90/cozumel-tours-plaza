@@ -124,8 +124,8 @@ router.post("/booking", function(req, res) {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: process.env.GMAIL_ACCOUNT, // generated ethereal user
-            pass: process.env.GMAIL_PASSWORD // generated ethereal password
+            user: "booking.toursplaza@gmail.com", // generated ethereal user
+            pass: "mc17856904k"// generated ethereal password
         },
         tls:{
             rejectUnauthorized: false
@@ -134,8 +134,8 @@ router.post("/booking", function(req, res) {
 
     // setup email data with unicode symbols
     let mailOptions = {
-        from: process.env.GMAIL_ACCOUNT, // sender address
-        to:   process.env.RECEIVER,  //"martin.carrascof@gmail.com", 
+        from: "booking.toursplaza@gmail.com", // sender address
+        to:   "eduardoczm@gmail.com",  //"martin.carrascof@gmail.com", 
         replyTo: req.body.email,// list of receivers
         subject: subject, // Subject line
         html: output // html body
