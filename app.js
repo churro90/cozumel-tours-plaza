@@ -54,6 +54,6 @@ app.use("/", contactRoutes),
 app.use("/tp-admin", adminRoutes);
 
 
-app.listen(8081, 104.238.95.13, function(){
+app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Servidor iniciado");
 });
