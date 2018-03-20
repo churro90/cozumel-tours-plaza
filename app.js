@@ -19,6 +19,8 @@ var contactRoutes   = require("./routes/contact");
 var bookingRoutes   = require("./routes/booking");
 var adminRoutes   = require("./routes/admin");
 var MONGODB = "mongodb://martin:toursplaza@ds157653.mlab.com:57653/tours_plaza";
+var PORT = 80;
+var IP = "104.238.95.13";
     
     
 app.use(bodyParser.urlencoded({extended: true}));
@@ -54,6 +56,6 @@ app.use("/", contactRoutes),
 app.use("/tp-admin", adminRoutes);
 
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(PORT, IP, function(){
    console.log("Servidor iniciado");
 });
