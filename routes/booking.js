@@ -63,7 +63,8 @@ router.get("/booking", function(req, res) {
 });
 
 router.get("/payment", function(req, res) {
-   res.render("payment"); 
+   var info = req.session.localVar;
+   res.render("payment", {info: info}); 
 });
 
 router.post("/booking", function(req, res) {
@@ -124,8 +125,8 @@ router.post("/booking", function(req, res) {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: process.env.GMAIL_ACCOUNT, // generated ethereal user
-            pass: process.env.GMAIL_PASSWORD // generated ethereal password
+            user: "booking.toursplaza@gmail.com", // generated ethereal user
+            pass: "mc17856904k" // generated ethereal password
         },
         tls:{
             rejectUnauthorized: false
@@ -134,8 +135,8 @@ router.post("/booking", function(req, res) {
 
     // setup email data with unicode symbols
     let mailOptions = {
-        from: process.env.GMAIL_ACCOUNT, // sender address
-        to:   process.env.RECEIVER,  //"martin.carrascof@gmail.com", 
+        from: "booking.toursplaza@gmail.com", // sender address
+        to:   "eduardoczm@gmail.com",  //"martin.carrascof@gmail.com", 
         replyTo: req.body.email,// list of receivers
         subject: subject, // Subject line
         html: output // html body
@@ -144,14 +145,15 @@ router.post("/booking", function(req, res) {
     // send mail with defined transport object
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
+            console.log(error);
             req.flash("error", "There was an error submiting your reservation, please contact us directly at eduardoczm@gmail.com or try again");
             return res.redirect("booking");
         }
             else {
         
-        return res.render("payment", {"success":"Your reservation was succesfully submited",
-           info: req.body }
-        );
+        req.flash("success", "Your reservation was succesfully submited");
+        req.session.localVar = req.body
+        return res.redirect("payment");
             }
     });
 }); 
@@ -164,5 +166,9 @@ router.post("/booking", function(req, res) {
  
 });
 
+router.get("/thanks", function(req, res) {
+   var info = req.session.localVar;
+   res.render("thanks", {info: info}); 
+});
 
 module.exports = router;

@@ -7,6 +7,13 @@ router.get("/contact", function(req, res){
    res.render("contact"); 
 });
 
+router.get("/contact-failed", function(req, res) {
+  res.render("contact"); 
+});
+router.get("/contact-success", function(req, res) {
+  res.render("contact"); 
+});
+
 router.post("/contact", function(req, res){
     var subject= req.body.subject;
     var email = req.body.email;
@@ -35,8 +42,8 @@ nodemailer.createTestAccount((err, account) => {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: process.env.GMAIL_ACCOUNT, // generated ethereal user
-            pass: process.env.GMAIL_PASSWORD // generated ethereal password
+            user: "booking.toursplaza@gmail.com", // generated ethereal user
+            pass: "mc17856904k" // generated ethereal password
         },
         tls:{
             rejectUnauthorized: false
@@ -45,8 +52,8 @@ nodemailer.createTestAccount((err, account) => {
 
     // setup email data with unicode symbols
     let mailOptions = {
-        from: process.env.GMAIL_ACCOUNT, // sender address
-        to:   process.env.RECEIVER,
+        from: "booking.toursplaza@gmail.com", // sender address
+        to:   "eduardoczm@gmail.com",
         replyTo: email, // list of receivers
         subject: subject, // Subject line
         html: output // html body
@@ -57,11 +64,11 @@ nodemailer.createTestAccount((err, account) => {
         if (error) {
             req.flash("error", "There was an error submiting your form, please contact us directly at eduardoczm@gmail.com or try again");
             console.log(error);
-            return res.redirect("contact");
+            return res.redirect("contact-failed");
         } else {
        
        req.flash("success", "Message sent successfully, we will get back to you as soon as possible");
-       return res.redirect("contact");
+       return res.redirect("contact-success");
         
         }
     });

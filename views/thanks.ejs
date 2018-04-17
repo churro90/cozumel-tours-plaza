@@ -1,0 +1,81 @@
+<% include partials/header %>
+
+<div class="text-center mt-5 pt-3">
+  <h1>Your payment was succesfull! Here are your reservation details:</h1>
+</div>
+<br>
+
+<div class="container">
+    
+    <h1>Reservation details:</h1>
+    <table class="table">
+  <thead>
+    <tr>
+     
+      </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Name</th>
+      <td><%= info.firstName %> <%= info.lastName %></td>
+      
+    </tr>
+    <tr>
+      <th scope="row">Email</th>
+      <td><%= info.email %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Date</th>
+      <td><%= info.date %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Starting time</th>
+      <td><%= info.startTime %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Service</th>
+      <td><%= info.vehicle %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row"># of People</th>
+      <td><%= info.people %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Country</th>
+      <td><%= info.country %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Cellphone</th>
+      <td><%= info.areaCode %><%= info.cellphone %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Comentaries</th>
+      <td><%= info.info %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Requirements</th>
+      <td><%= info.requirements %></td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Additionals</th>
+      <td><%= info.babySeat %></td>
+   
+    </tr>
+  </tbody>
+</table>
+    
+
+</div>
+<hr>
+
+
+<% include partials/footer %>
