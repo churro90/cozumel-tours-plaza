@@ -126,7 +126,11 @@ router.post("/booking", function(req, res) {
         secure: true, // true for 465, false for other ports
         auth: {
             user: "booking.toursplaza@gmail.com", // generated ethereal user
+<<<<<<< HEAD
             pass: "mc17856904k" // generated ethereal password
+=======
+            pass: "mc17856904k"// generated ethereal password
+>>>>>>> d0c7190ed242dfae90ebddb69f50aff9f28daaaa
         },
         tls:{
             rejectUnauthorized: false

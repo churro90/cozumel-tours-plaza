@@ -18,6 +18,9 @@ var indexRoutes   = require("./routes/index");
 var contactRoutes   = require("./routes/contact");
 var bookingRoutes   = require("./routes/booking");
 var adminRoutes   = require("./routes/admin");
+var MONGODB = "mongodb://martin:toursplaza@ds157653.mlab.com:57653/tours_plaza";
+var PORT = 80;
+var IP = "104.238.95.13";
     
     
 app.use(bodyParser.urlencoded({extended: true}));
@@ -25,7 +28,7 @@ app.use(helmet());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
-mongoose.connect(process.env.MONGODB); //definir como variable de ambiente!!!!!
+mongoose.connect(MONGODB); //definir como variable de ambiente!!!!!
 app.use(require("express-session")({
     secret: "Yo soy bien picota pa las bromas",
     resave: false,
@@ -53,6 +56,6 @@ app.use("/", contactRoutes),
 app.use("/tp-admin", adminRoutes);
 
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(PORT, IP, function(){
    console.log("Servidor iniciado");
 });
