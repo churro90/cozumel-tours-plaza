@@ -56,6 +56,73 @@ app.use("/", contactRoutes),
 app.use("/tp-admin", adminRoutes);
 
 
-app.listen(PORT, IP, function(){
+app.post("/special-tour", (req, res) => {
+ var output = `
+     <h1> Tienes una nueva solicitud de reserva:</h1>
+     <br>
+     <h3>Detalles</h3>
+     <ul>
+        <li>Nombre: ${req.body.name}</li>
+        <li>Email:  ${req.body.email} </li>
+        <li>Fecha:  ${req.body.date} </li>
+        <li>Hora:   ${req.body.startTime} </li>
+        <li>Hotel or ship:  ${req.body.cruiseOrHotel} </li>
+        <li>Numero de personas:  ${req.body.people} </li>
+        <li>Celular:  ${req.body.cellphoneNumber} </li>
+    </ul>
+    `;
+    
+    var subject = req.body.name + " " + req.body.date + " NR Special Tour";
+        
+
+     nodemailer.createTestAccount((err, account) => {
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: "booking.toursplaza@gmail.com", // generated ethereal user
+            pass: "mc17856904k" // generated ethereal password
+
+
+        },
+        tls:{
+            rejectUnauthorized: false
+        }
+    });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: "booking.toursplaza@gmail.com", // sender address
+        to:   "eduardoczm@gmail.com",  //"martin.carrascof@gmail.com", 
+        replyTo: req.body.email,// list of receivers
+        subject: subject, // Subject line
+        html: output // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            req.flash("error", "There was an error submiting your reservation, please contact us directly at eduardoczm@gmail.com or try again");
+            return res.redirect("special-tour");
+        }
+            else {
+        
+        req.flash("success", "Your reservation was succesfully submited, we will get back to you as soon as possible");
+        req.session.localVar = req.body;
+        return res.redirect("special-tour");
+            }
+    });
+}); 
+       }
+       
+    );
+        
+
+
+app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Servidor iniciado");
 });

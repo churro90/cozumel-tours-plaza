@@ -17,6 +17,10 @@ router.get("/about-us", function(req, res){
     res.render("about-us");
 });
 
+router.get("/special-tour", function(req, res){
+    res.render("special-tour");
+});
+
 router.get("/prices", function(req, res) {
     res.render("prices");
 });

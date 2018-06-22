@@ -1,0 +1,206 @@
+<% include partials/header %>
+<div class="container flash">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+<div class="container" style="margin-top: 80px; min-height: 150vh;">
+    <div class="row text-center">
+     <div class="col-sm-12">
+          <h1>Cozumel special price 4 hour tour</h1>
+          <p>Pick you up at your hotel or cruise ship or ferry pier, city tour, visit to Chocolate factory or to Tequila tastings (no tour), 
+          visit to San Gervasio Mayan ruins, eastern "wild" side of the island, Palancar Beach for snorkel from shore or have a 
+          mexican/seafood lunch, (snorkel gear or food not included), then head back to the hotel or cruiseship for drop off.</p>
+     </div>
+     
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Includes:</h2>
+            <ul>
+                <li>Pick up and drop off (at hotel in Cozumel or at the Cruise Ship pier or at the Ferry from Playa del Carmen Pier)</li>
+                <li>Four hour taxi private tour (depending on the number of persons) by Taxi Car or Taxi Van with one of our trustworthy and experts drivers/guides</li>
+                <li>Choose from a visit to Chocolate tastings at KaoKao Factory or a Tequila tastings at Mexico Lindo</li>
+                <li>Entrance fee to San Gervasio Mayan Ruins (guide inside the ruins not included)</li>
+                <li>East side (wild side) of the island sightseen, short stop at Palancar beach for snorkel or have lunch (snorkel gear rent or lunch not included)</li>
+            </ul>
+            <p>*Note: once in here you could add extra hours to your tour for an extra cost</p>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Check out our prices!
+    </button>
+    <div class="row text-center justify-content-center">
+        <div class="col-sm-12 col-md-6">
+            <p>If you wish to go through with booking, we can process your reservation via e-mail; we just need you to please fill out the missing information: </p>
+            <form class="mt-0" action="/special-tour" method="POST">
+                <div class="form-group">
+                    <label for="name">Name and lastname</label>
+                    <input id="name" type="text" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" class="form-control" required>
+                </div>
+                 <div class="form-group">
+                <label for="datepicker"><strong>Select date *</strong> </label>
+                 <input id="datepicker" type="text" name="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Type of service</label>
+                    <input id="service" type="text" name="service" class="form-control" value="Cozumel special tour"  disabled>
+                </div>
+                   <div class="form-group">
+                    <label for="people">How many people are coming?</label>
+                    <input type="number" id="people" name="people" class="form-control" required>
+                    </div>
+                    <div class="form-group ">
+            <label for="timeSelect"><strong>Starting time *</strong></label>
+                <select class="form-control" id="timeSelect" name="startTime" required>
+                  <option value="7:30 AM">7:30 AM</option>
+                  <option value="8:00 AM">8:00 AM</option>
+                  <option value="8:30 AM">8:30 AM</option>
+                  <option value="9:00 AM">9:00 AM</option>
+                  <option value="9:30 AM">9:30 AM</option>
+                  <option value="10:00 AM">10:00 AM</option>
+                  <option value="10:30 AM">10:30 AM</option>
+                  <option value="11:00 AM">11:00 AM</option>
+                  <option value="11:30 AM">11:30 AM</option>
+                  <option value="12:00 PM">12:00 PM</option>
+                  <option value="12:30 PM">12:30 PM</option>
+                  <option value="1:00 PM">1:00 PM</option>
+                  <option value="1:30 PM">1:30 PM</option>
+                  <option value="2:00 PM">2:00 PM</option>
+                  <option value="2:30 PM">2:30 PM</option>
+                  <option value="3:00 PM">3:00 PM</option>
+                  <option value="3:30 PM">3:30 PM</option>
+                  <option value="4:00 PM">4:00 PM</option>
+                  <option value="4:30 PM">4:30 PM</option>
+                  <option value="5:00 PM">5:00 PM</option>
+                  <option value="5:30 PM">5:30 PM</option>
+                  <option value="6:00 PM">6:00 PM</option>
+                  <option value="6:30 PM">6:30 PM</option>
+                  <option value="7:00 PM">7:00 PM</option>
+                  <option value="7:30 PM">7:30 PM</option>
+                  <option value="8:00 PM">8:00 PM</option>
+                </select>
+          </div>
+          <div class="form-group">
+              <label for="cruiseOrHotel">Cruiseship? or Cozumel hotel? name: </label>
+              <input type="text" name="cruiseOrHotel" id="cruiseOrHotel" class="form-control" required>
+          </div>
+          <div class="form-group">
+              <label for="cellphoneNumber">Cellphone number </label>
+              <input type="text" name="cellphoneNumber" id="cellphoneNumber" class="form-control" required>
+          </div>
+          <input type="submit" class="btn btn-primary btn-block" value="Send!">
+            </form>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-sm-12">
+            <p>When we hear back from you with this information, we'll send you a PayPal invoice requesting an advance prepayment (which you can pay with PayPal funds or a credit/debit card online) in order to confirm the reservation.
+Once the payment goes through, we'll send your confirmation letter and pick up details via e-mail.
+            </p><br>
+            <p>
+               Please let me know if there's anything else I can help you with.  
+            </p> <br>
+            <p> Greetings from Cozumel!</p>
+        </div>
+    </div>
+    
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Price per person in USD</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ol>
+            <li>$154 (car)</li>
+            <li>$84 (car)</li>
+            <li>$60 (car)</li>
+            <li>$60 (Mini Van)</li>
+            <li>$51 (Mini Van)</li>
+            <li>$55 (Regular Van)</li>
+            <li>$49 (Regular Van)</li>
+            <li>$45 (Regular Van)</li>
+            <li>$43 (Regular Van)</li>
+            <li>$41 (xVan)</li>
+            <li>$47 (Larger Van)</li>
+            <li>$44 (Larger Van)</li>
+            <li>$42 (Larger Van)</li>
+            <li>$40 (Larger Van)</li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+</div>
+
+<script type="text/javascript" src="/javascript/jquery-ui.min.js"></script>
+<script>
+var dateToday = new Date();
+
+
+
+
+
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+var datePlusTwo = addDays(dateToday, 2);
+var disableDate = [];
+
+/*setear el datepicker 2 dias hacia adelante*/
+$("#datepicker").datepicker(
+    {
+       changeMonth: true,
+       changeYear: true,
+       defaultDate: +2,
+       dateFormat: "DD MM d, yy",
+       minDate: datePlusTwo,
+       beforeShowDay: unavailable
+    }
+    );
+function unavailable(date){
+    this.disableDate = disableDate;
+ /*   var dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+    for(var i=0; i<disableDate.length; i++) {
+    if(dmy != disableDate[i]){
+        return [true, ""];
+    } else{
+        return [false, "", "Unavailable"];
+    }
+}*/
+    var string = jQuery.datepicker.formatDate("d-m-yy", date);
+    return [disableDate.indexOf(string) == -1];
+    
+}
+
+/*inicializar el date picker como deshabilitado*/
+$("#datepicker").datepicker();
+    
+    
+    </script>
