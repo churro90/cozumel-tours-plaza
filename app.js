@@ -30,7 +30,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 mongoose.connect(MONGODB); //definir como variable de ambiente!!!!!
 app.use(require("express-session")({
-    secret: "Yo soy bien picota pa las bromas",
+    secret: "cozumeltours",
     resave: false,
     saveUninitialized: false
 }));
